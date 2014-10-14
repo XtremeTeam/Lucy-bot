@@ -1,0 +1,86 @@
+#-------------------------------------------------------------------------#
+# Lucy's configuration file                                               #  
+#                                                                         #
+#  Config file Rev 1.1                                                    #
+#-------------------------------------------------------------------------#
+CONNECT_SERVER = xtreme.im
+PORT = 5222 
+JID = lucy@doman.tld
+PASSWORD = 
+RESOURCE = X-team
+
+# TLS/SSL, if no need, comment or leave as is
+#---------------------------------------------
+USE_TLS_SSL = 1
+
+# Proxy server, if there is a proxy, simply uncomment this params
+#----------------------------------------------------------------
+# PROXY_HOST = 148.233.239.23
+# PROXY_PORT = 80
+# PROXY_USER = someuser
+# PROXY_PASSWORD = secret
+
+# Default chatroom, uncomment and specify if needed
+#--------------------------------------------------
+DEFAULT_CHATROOM = x-team@muc.xtreme.im
+
+# Chatroom nick
+#---------------
+DEFAULT_NICK = Lucy
+
+# Keep-alive period in seconds
+#-----------------------------
+KEEP_ALIVE = 100
+
+# Jabber accounts that will administrate fatal
+#---------------------------------------------
+ADMINS = admin1@xtreme.im,admi2@xtreme.im
+#ADMIN_PASSWORD = 
+
+
+# Controls delivery of all private-messages in bot-roster to admin jids
+#----------------------------------------------------------------------
+ADMINS_DELIVERY = 1
+
+# Controls delivery of all core exceptions to admin jids, for debug
+#------------------------------------------------------------------
+ERRORS_DELIVERY = 1
+
+# Controls autosubscribe
+#-----------------------
+AUTO_SUBSCRIBE = 1
+
+# Lucy will try to reconnect on disconnections
+#--------------------------------------------------
+AUTO_RESTART = 1
+
+# Controls hide/show of lucy's console at startup
+#---------------------------------------------------
+SHOW_CONSOLE = 1
+
+# Lucy's Command prefix. For example: . or !
+#----------------------------------------------------------
+COMM_PREFIX = .
+
+# Msg chatrooms&private limits
+#-----------------------------
+MSG_CHATROOM_LIMIT = 5000
+MSG_PRIVATE_LIMIT = 10000
+
+# Where to store HTML files from chatrooms logs
+# To disable logging simply comment this param
+#----------------------------------------------
+ PUBLIC_LOG_DIR = logs
+
+# Where to store logs of private chats
+# To disable logging simply comment this param
+#---------------------------------------------
+ PRIVATE_LOG_DIR = privlogs
+
+# If not null bot reloads plugins and core with changed source-code
+# Specifies interval (in minutes) when check and reload changed code
+#-------------------------------------------------------------------
+RELOAD_CODE = 0
+
+# End of Lucy's configuration file
+#------------------------------------

@@ -19,7 +19,7 @@
 
 import pymetar
 
-WEATHERCODE_FILE = 'brain/static/weather.txt'
+WEATHERCODE_FILE = 'settings/weather.txt'
 
 def handler_weather_weather(type, source, parameters):
 	if not parameters:

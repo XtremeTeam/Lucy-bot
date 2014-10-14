@@ -7,7 +7,7 @@
 
 ##############################################################
 ## Настройка плагина #########################################
-QUIZ_FILE = 'static/questions.txt' # путь к БД ###############
+QUIZ_FILE = 'settings/questions.txt' # путь к БД ###############
 QUIZ_TOTAL_LINES = 29 # количество вопросов в БД ##########
 QUIZ_TIME_LIMIT = 200 # таймаут в секундах ###################
 QUIZ_IDLE_LIMIT = 3 # количество таймаутов до OFF ############
@@ -456,14 +456,14 @@ def handler_quiz_base_del(type, source, body):
         
         
 
-register_command_handler(handler_quiz_start, COMM_PREFIX+'!start', ['new','quiz','all'], 20, 'Start quiz.', '!start', ['!start'])
-register_command_handler(handler_quiz_help, COMM_PREFIX+'!quiz', ['new','quiz','all'], 0, 'Conclusion HELP.', '!quiz', ['!quiz'])
-register_command_handler(handler_quiz_resend, COMM_PREFIX+'!repeat', ['new','quiz','all'], 0, 'Repeat current question.', '!repeat', ['!repeat'])
-register_command_handler(handler_quiz_stop, COMM_PREFIX+'!stop', ['new','quiz','all'], 20, 'Stop quiz.', '!stop', ['!stop'])
-register_command_handler(handler_quiz_hint, COMM_PREFIX+'!hint', ['new','quiz','all'], 0, 'Find an answer tip (ХЭ).', '!hint', ['!hint'])
-register_command_handler(handler_quiz_scores, COMM_PREFIX+'!score', ['new','quiz','all'], 0, 'Display conclusion of the current score (nickname, total points).', '!score', ['!score'])
-register_command_handler(handler_quiz_next, COMM_PREFIX+'!next', ['new','quiz','all'], 0, 'Next question.', '!next', ['!next'])
-register_command_handler(handler_quiz_answer,COMM_PREFIX+ '!answer', ['new','quiz','all'], 100, 'Display correct answer <CHEAT>.', '!answer', ['!answer'])
-register_command_handler(handler_quiz_base_del, COMM_PREFIX+'!base_del', ['new','quiz','all'], 100, 'Delete all the database.', '!base_del [JID]', ['!base_del guy@jsmart.web.id', '!base_del'])
+register_command_handler(handler_quiz_start, COMM_PREFIX+'qstart', ['new','quiz','all'], 20, 'Start quiz.', '!start', ['!start'])
+register_command_handler(handler_quiz_help, COMM_PREFIX+'quiz', ['new','quiz','all'], 0, 'Conclusion HELP.', '!quiz', ['!quiz'])
+register_command_handler(handler_quiz_resend, COMM_PREFIX+'repeat', ['new','quiz','all'], 0, 'Repeat current question.', '!repeat', ['!repeat'])
+register_command_handler(handler_quiz_stop, COMM_PREFIX+'stop', ['new','quiz','all'], 20, 'Stop quiz.', '!stop', ['!stop'])
+register_command_handler(handler_quiz_hint, COMM_PREFIX+'hint', ['new','quiz','all'], 0, 'Find an answer tip (ХЭ).', '!hint', ['!hint'])
+register_command_handler(handler_quiz_scores, COMM_PREFIX+'score', ['new','quiz','all'], 0, 'Display conclusion of the current score (nickname, total points).', '!score', ['!score'])
+register_command_handler(handler_quiz_next, COMM_PREFIX+'next', ['new','quiz','all'], 0, 'Next question.', '!next', ['!next'])
+register_command_handler(handler_quiz_answer,COMM_PREFIX+ 'answer', ['new','quiz','all'], 100, 'Display correct answer <CHEAT>.', '!answer', ['!answer'])
+register_command_handler(handler_quiz_base_del, COMM_PREFIX+'base_del', ['new','quiz','all'], 100, 'Delete all the database.', '!base_del [JID]', ['!base_del guy@jsmart.web.id', '!base_del'])
 
 register_message_handler(handler_quiz_message)

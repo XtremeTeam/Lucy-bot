@@ -1,11 +1,11 @@
 #===islucyplugin===
 # -*- coding: utf-8 -*-
 
-#  Tron plugin
-#  delirium_plugin.py
+#  lucy plugin
+#  delirium.py
 
 #  Initial Copyright © 2007 Als <Als@exploit.in>
-#  Modifications Copyright © 2009 wd/lotusfeet <dao/yoga>
+#  Modifications Copyright © 2014 x-team <x-team@muc.xtreme.im>
 
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -49,7 +49,7 @@ def handler_poke(type, source, parameters):
 			if parameters in GROUPCHATS[source[1]]:
 				pokes=[]
 				pokes.extend(poke_work(source[1]))
-				pokes.extend(eval(read_file('brain/static/delirium.txt'))['poke'])
+				pokes.extend(eval(read_file('settings/delirium.txt'))['poke'])
 				rep = random.choice(pokes)
 				msg(source[1],u'/me '+rep % parameters)
 			else:

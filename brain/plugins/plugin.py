@@ -1,4 +1,4 @@
-#===istalismanplugin===
+#===islucyplugin===
 # -*- coding: utf-8 -*-
 
 #  BlackSmith plugin

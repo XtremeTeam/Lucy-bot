@@ -563,7 +563,7 @@ def get_gch_info(gch, info):
 	else:
 		print 'Error adding groupchat to groupchats list file!'	
 
-def add_gch(groupchat=None, nick=None, passw=None):
+def add_gch(groupchat=None, nick=None, passw=None, prefix=None):
 	if check_file(file='chatrooms.list'):
 		gchdb = eval(read_file(GROUPCHAT_CACHE_FILE))
 		if not groupchat in gchdb:
@@ -571,6 +571,7 @@ def add_gch(groupchat=None, nick=None, passw=None):
 			gchdb[groupchat] = {}
 			gchdb[groupchat]['nick'] = nick
 			gchdb[groupchat]['passw'] = passw
+			gchdb[groupchat]['prefix'] = prefix
 		else:
 			if nick and groupchat and passw:
 				gchdb[groupchat]['nick'] = nick
@@ -581,6 +582,8 @@ def add_gch(groupchat=None, nick=None, passw=None):
 				del gchdb[groupchat]
 			elif passw:
 				gchdb[groupchat]['passw'] = passw
+			elif prefix:
+                                gchdb[groupchat]['prefix'] = prefix
 			else:
 				return 0
 		write_file(GROUPCHAT_CACHE_FILE, str(gchdb))
@@ -850,7 +853,7 @@ def messageHnd(con, msg):
 	bot_nick = get_bot_nick(fromjid.getStripped())
 	if bot_nick == fromjid.getResource():
 		return
-	command,parameters,cbody,rcmd = '','','',''
+	command,parameters,cbody,rcmd,prefix = '','','','',''
 	for x in [bot_nick+x for x in [':',',','>']]:
 		body=body.replace(x,'')
 	body=body.strip()
@@ -864,28 +867,36 @@ def messageHnd(con, msg):
 	command=cbody.split()[0].lower()
 	if cbody.count(' '):
 		parameters = cbody[(cbody.find(' ') + 1):].strip()
-
-	if command in COMMANDS:
-		if fromjid.getStripped() in COMMOFF and command in COMMOFF[fromjid.getStripped()]:
-			return
-		else:
-			if fromjid.getStripped() in GROUPCHATS:			
-				if GCHCFGS[fromjid.getStripped()]['autoaway']==1:
-					if LAST['gch'][fromjid.getStripped()]['autoaway']==1:
-						change_bot_status(fromjid.getStripped(), GCHCFGS[fromjid.getStripped()]['status']['status'], GCHCFGS[fromjid.getStripped()]['status']['show'],)
-			call_command_handlers(command, mtype, [fromjid, fromjid.getStripped(), fromjid.getResource()], unicode(parameters), rcmd)
-			INFO['cmd'] += 1
-			LAST['t'] = time.time()
-			LAST['c'] = command
-			if fromjid.getStripped() in GROUPCHATS:		
-				if GCHCFGS[fromjid.getStripped()]['autoaway']==1:
-					if LAST['gch'][fromjid.getStripped()]['thr']:
-						LAST['gch'][fromjid.getStripped()]['thr'].cancel()
-					LAST['gch'][fromjid.getStripped()]['thr']=threading.Timer(600,change_bot_status,(fromjid.getStripped(), u'In standby mode. time I\'ve been in standby mode  '+time.strftime('%d.%m.%Y@%H:%M:%S GMT.', time.gmtime()), 'away',1))
-					try:
-						LAST['gch'][fromjid.getStripped()]['thr'].start()
-					except RuntimeError:
-						pass
+		groupchat = fromjid.getStripped()
+	listofprefixes = ['!','@','#','$','%','^','&','*','(',')','_','-','=','+','/',']','[','}','{','"',';',':','|','?','<','>','.',',','~','`']
+	if command[0] in listofprefixes:
+                prefix = command[0]
+                command = command[1:]
+        DBPATH = 'settings/chatrooms.list'
+        prefixdb = eval(read_file(DBPATH))
+        savedprefix = prefixdb[groupchat]['prefix']
+        if prefix == savedprefix:
+                if command in COMMANDS:
+        		if fromjid.getStripped() in COMMOFF and command in COMMOFF[fromjid.getStripped()]:
+                                return
+                        else:
+        			if fromjid.getStripped() in GROUPCHATS:			
+                                        if GCHCFGS[fromjid.getStripped()]['autoaway']==1:
+        					if LAST['gch'][fromjid.getStripped()]['autoaway']==1:
+                                                        change_bot_status(fromjid.getStripped(), GCHCFGS[fromjid.getStripped()]['status']['status'], GCHCFGS[fromjid.getStripped()]['status']['show'],)
+                                call_command_handlers(command, mtype, [fromjid, fromjid.getStripped(), fromjid.getResource()], unicode(parameters), rcmd)
+                                INFO['cmd'] += 1
+                                LAST['t'] = time.time()
+                                LAST['c'] = command
+                                if fromjid.getStripped() in GROUPCHATS:		
+        				if GCHCFGS[fromjid.getStripped()]['autoaway']==1:
+                                                if LAST['gch'][fromjid.getStripped()]['thr']:
+        						LAST['gch'][fromjid.getStripped()]['thr'].cancel()
+                                                LAST['gch'][fromjid.getStripped()]['thr']=threading.Timer(600,change_bot_status,(fromjid.getStripped(), u'In standby mode. time I\'ve been in standby mode  '+time.strftime('%d.%m.%Y@%H:%M:%S GMT.', time.gmtime()), 'away',1))
+                                                try:
+        						LAST['gch'][fromjid.getStripped()]['thr'].start()
+                                                except RuntimeError:
+        						pass
 
 def presenceHnd(con, prs):
 	fromjid = prs.getFrom()

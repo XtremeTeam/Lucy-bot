@@ -870,6 +870,7 @@ def messageHnd(con, msg):
 	if command[0] in listofprefixes:
                 prefix = command[0]
                 command = command[1:]
+        groupchat = fromjid.getStripped()
         useless, seperator, identifier = groupchat.partition('@')
         identifier, seperator, rest = identifier.partition('.')
         if identifier == 'conference' or identifier == 'muc':

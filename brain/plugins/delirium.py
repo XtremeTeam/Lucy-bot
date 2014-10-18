@@ -304,6 +304,12 @@ def hnd_ivite_block(type,source,parameters):
     except:
         pass
 
+def handler_default_bot_nick(type, source, parameters):
+        add_gch(source[1], DEFAULT_NICK)
+        join_groupchat(source[1], DEFAULT_NICK)
+        reply(type, source, u'OK, the default nickname has been set.')
+
+register_command_handler(handler_default_bot_nick, 'sdbn', ['delirium','en','all'], 20, 'Change the nickname of the bot to it\'s default, which is '+DEFAULT_NICK, 'sdbn')
 register_command_handler(handler_poke, 'poke', ['fun','all','*','poke'], 10, 'Poke the user. Forces him to pay attention to you /in chat, специально для слоупоков.\nlast10 instead of a nick show a list of workers who poked latest.', 'poke <nick>|<parameter>', ['poke qwerty','poke + sing %s','poke - 2','poke *'])
 register_command_handler(handler_poke_add, 'poke+', ['fun','all','*','poke'], 20, 'Add a custom phrases. The variable %s in the phrase refers to a place to insert a nickname (mandatory parameter). The phrase should be written by a third person, it will use the following form "/me your phrase". max number of custom phrases is 20 characters.', 'poke+ <phrase>', ['poke+ sing %s'])
 register_command_handler(handler_poke_del, 'poke-', ['fun','all','*','poke'], 20, 'Delete a custom phrase. Write the number of phrase to erase the words, the bot will delete it permanently. Write the commands "poked*" to view the list. In order to delete all phrases just specify "*" instead of phrase number.', 'poke- <number>', ['poke- 5','poke- *'])

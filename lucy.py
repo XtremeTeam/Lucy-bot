@@ -880,7 +880,10 @@ def messageHnd(con, msg):
         else:
                 savedprefix = ''
                 prefix = ''
-        if prefix == savedprefix:
+        if command == 'prefix' and not parameters:
+                parameters == ''
+                call_command_handlers(command, mtype, [fromjid, fromjid.getStripped(), fromjid.getResource()], unicode(parameters), rcmd)
+        elif prefix == savedprefix:
                 if command in COMMANDS:
         		if fromjid.getStripped() in COMMOFF and command in COMMOFF[fromjid.getStripped()]:
                                 return

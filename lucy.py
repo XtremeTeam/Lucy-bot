@@ -571,7 +571,7 @@ def add_gch(groupchat=None, nick=None, passw=None, prefix=None):
 			gchdb[groupchat] = {}
 			gchdb[groupchat]['nick'] = nick
 			gchdb[groupchat]['passw'] = passw
-			gchdb[groupchat]['prefix'] = prefix
+			gchdb[groupchat]['prefix'] = ''
 		else:
 			if nick and groupchat and passw:
 				gchdb[groupchat]['nick'] = nick
@@ -582,8 +582,6 @@ def add_gch(groupchat=None, nick=None, passw=None, prefix=None):
 				del gchdb[groupchat]
 			elif passw:
 				gchdb[groupchat]['passw'] = passw
-			elif prefix:
-                                gchdb[groupchat]['prefix'] = prefix
 			else:
 				return 0
 		write_file(GROUPCHAT_CACHE_FILE, str(gchdb))
@@ -710,7 +708,7 @@ def join_groupchat(groupchat=None, nick=DEFAULT_NICK, passw=None):
 	else:
 		print 'IO error when creating macros.txt for ',groupchat
 		
-	add_gch(groupchat, nick, passw)
+	add_gch(groupchat, nick, passw, prefix)
 
 	prs=xmpp.protocol.Presence(groupchat+'/'+nick)
 	prs.setStatus(GCHCFGS[groupchat]['status']['status'])
@@ -721,7 +719,7 @@ def join_groupchat(groupchat=None, nick=DEFAULT_NICK, passw=None):
 		pres.setTagData('password', passw)
 	JCON.send(prs)
 """
-def join_groupchat(groupchat=None, nick=DEFAULT_NICK, passw=None):
+def join_groupchat(groupchat=None, nick=DEFAULT_NICK, passw=None, prefix=None):
         confstatus=[u'chat',u'Hi there! I\'m Lucy!  Write "%shelp" and follow the instructions. (Made by X-team)' % (COMM_PREFIX)]#ketik "help" tanpa tanda kutip, untuk mendapatkan bantuan!
         if check_file(file='statuses.list'):
           groupchatstatus = eval(read_file(GROUPCHAT_STATUS_CACHE_FILE))
@@ -872,9 +870,15 @@ def messageHnd(con, msg):
 	if command[0] in listofprefixes:
                 prefix = command[0]
                 command = command[1:]
-        DBPATH = 'settings/chatrooms.list'
-        prefixdb = eval(read_file(DBPATH))
-        savedprefix = prefixdb[groupchat]['prefix']
+        useless, seperator, identifier = groupchat.partition('@')
+        identifier, seperator, rest = identifier.partition('.')
+        if identifier == 'conference' or identifier == 'muc':
+                DBPATH = 'settings/chatrooms.list'
+                prefixdb = eval(read_file(DBPATH))
+                savedprefix = prefixdb[groupchat]['prefix']
+        else:
+                savedprefix = ''
+                prefix = ''
         if prefix == savedprefix:
                 if command in COMMANDS:
         		if fromjid.getStripped() in COMMOFF and command in COMMOFF[fromjid.getStripped()]:

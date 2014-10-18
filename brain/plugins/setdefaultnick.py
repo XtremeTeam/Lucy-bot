@@ -13,4 +13,4 @@ def handler_default_bot_nick(type, source, parameters):
         join_groupchat(source[1], DEFAULT_NICK)
         reply(type, source, u'OK, the default nickname has been set.')
 
-register_command_handler(handler_default_bot_nick, COMM_PREFIX+'sdbn', ['delirium','en','all'], 20, 'Change the nickname of the bot to it\'s default, which is '+DEFAULT_NICK, 'sdbn')
+register_command_handler(handler_default_bot_nick, 'sdbn', ['delirium','en','all'], 20, 'Change the nickname of the bot to it\'s default, which is '+DEFAULT_NICK, 'sdbn')

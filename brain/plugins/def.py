@@ -96,7 +96,7 @@ def define_work(groupchat, command, definition,check):
                 
                 
                                 
-register_command_handler(handler_def, COMM_PREFIX+'def', ['def','en','all'], 20, 'Shows the definition of a word that been previously added to the bot.', 'def KiDo parameters',['def KiDo private'])
-register_command_handler(handler_defadd, COMM_PREFIX+'defadd', ['def','en','all'], 0, 'Add a word and it\'s definition to the bot.', 'defadd KiDo is my creator.')
-register_command_handler(handler_defdel, COMM_PREFIX+'defdel', ['def','en','all'], 20, 'Delete a word and it\'s definition from the bot.\nYou can write defdel * to remove all the definitions.', 'defdel KiDo')
-register_command_handler(handler_deflist, COMM_PREFIX+'deflist', ['def','en','all'], 20, 'Shows all the words and their definitions.', 'deflist')
+register_command_handler(handler_def, 'def', ['def','en','all'], 20, 'Shows the definition of a word that been previously added to the bot.', 'def KiDo parameters',['def KiDo private'])
+register_command_handler(handler_defadd, 'defadd', ['def','en','all'], 0, 'Add a word and it\'s definition to the bot.', 'defadd KiDo is my creator.')
+register_command_handler(handler_defdel, 'defdel', ['def','en','all'], 20, 'Delete a word and it\'s definition from the bot.\nYou can write defdel * to remove all the definitions.', 'defdel KiDo')
+register_command_handler(handler_deflist, 'deflist', ['def','en','all'], 20, 'Shows all the words and their definitions.', 'deflist')

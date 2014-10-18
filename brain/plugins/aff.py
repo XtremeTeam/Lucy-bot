@@ -222,5 +222,5 @@ def acheck_message(type, source, parameters):
                 acheck = 0
                 
 register_message_handler(acheck_message)
-register_command_handler(handler_aff, COMM_PREFIX+'aff', ['aff','en','all'], 20, 'show affiliation list in the current conference.\nOr type aff <list> clear to remove all JIDs in that list', 'aff <type>', ['aff owner','aff admin','aff moderator','aff member','aff participant','aff outcast','aff member clear'])
-register_command_handler(handler_aff, COMM_PREFIX+'inlist', ['aff','en','all'], 20, 'show affiliation list in the current conference', 'aff <type>', ['aff owner','aff admin','aff moderator','aff member','aff participant','aff outcast'])
+register_command_handler(handler_aff, 'aff', ['aff','en','all'], 20, 'show affiliation list in the current conference.\nOr type aff <list> clear to remove all JIDs in that list', 'aff <type>', ['aff owner','aff admin','aff moderator','aff member','aff participant','aff outcast','aff member clear'])
+register_command_handler(handler_aff, 'inlist', ['aff','en','all'], 20, 'show affiliation list in the current conference', 'aff <type>', ['aff owner','aff admin','aff moderator','aff member','aff participant','aff outcast'])

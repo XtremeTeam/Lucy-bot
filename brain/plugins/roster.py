@@ -166,5 +166,5 @@ def handler_usubscribe(type, source, parameters):
 	else:
 		reply(type, source, u'Invalid syntax!')		
 		
-register_command_handler(handler_subscribe, COMM_PREFIX+'subscribe', ['roster','superadmin','all','*'], 100, ' Allows you to add a contact from the roster of bot and sends the contact request authorization.', COMM_PREFIX+'subscribe <jid [name][:access]>', [COMM_PREFIX+'subscribe guy@jsmart.web.id',COMM_PREFIX+'subscribe guy@jsmart.web.id: 20',COMM_PREFIX+'subscribe guy@jsmart.web.id Friend',COMM_PREFIX+'subscribe guy@jsmart.web.id Friend: 80'])
-register_command_handler(handler_usubscribe, COMM_PREFIX+'usubscribe', ['roster','superadmin','all','*'], 100, 'Allows you to delete a contact from the roster and the subscription of bot.', COMM_PREFIX+'usubscribe <jid>', [COMM_PREFIX+'usubscribe guy@jsmart.web.id'])
+register_command_handler(handler_subscribe, 'subscribe', ['roster','superadmin','all','*'], 100, ' Allows you to add a contact from the roster of bot and sends the contact request authorization.', 'subscribe <jid [name][:access]>', ['subscribe guy@jsmart.web.id','subscribe guy@jsmart.web.id: 20','subscribe guy@jsmart.web.id Friend','subscribe guy@jsmart.web.id Friend: 80'])
+register_command_handler(handler_usubscribe, 'usubscribe', ['roster','superadmin','all','*'], 100, 'Allows you to delete a contact from the roster and the subscription of bot.', 'usubscribe <jid>', ['usubscribe guy@jsmart.web.id'])

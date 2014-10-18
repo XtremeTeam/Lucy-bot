@@ -138,4 +138,4 @@ def handler_features_answ(coze, res, type, source, nick):
 		else:
 			reply('private',source,u'Buggy client!')	
 
-register_command_handler(handler_features_get, COMM_PREFIX+'xeps', ['muc','info','all','*'], 10, 'Display, type of XEP\'s Jabber\'s on your client or on certain of nick client or on certain of JID.', COMM_PREFIX+'xeps <nick/JID>', [COMM_PREFIX+'xeps',COMM_PREFIX+'xeps guy',COMM_PREFIX+'xeps guy@jsmart.web.id/Home',COMM_PREFIX+'xeps tangerang@conference.jsmart.web.id/guy'])
+register_command_handler(handler_features_get, 'xeps', ['muc','info','all','*'], 10, 'Display, type of XEP\'s Jabber\'s on your client or on certain of nick client or on certain of JID.', 'xeps <nick/JID>', ['xeps','xeps guy','xeps guy@jsmart.web.id/Home','xeps tangerang@conference.jsmart.web.id/guy'])

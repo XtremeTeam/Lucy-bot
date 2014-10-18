@@ -21,22 +21,22 @@ def handler_help_help(type, source, parameters):
 	groupchat = source[1]
 	
 	ctglist = []
-	if parameters and COMMANDS.has_key(COMM_PREFIX+parameters.strip()):
-		rep = COMMANDS[COMM_PREFIX+parameters.strip()]['desc'].decode("utf-8") + u'\nCategories: '
-		for cat in COMMANDS[COMM_PREFIX+parameters.strip()]['category']:
+	if parameters and COMMANDS.has_key(parameters.strip()):
+		rep = COMMANDS[parameters.strip()]['desc'].decode("utf-8") + u'\nCategories: '
+		for cat in COMMANDS[parameters.strip()]['category']:
 			ctglist.append(cat)
-		rep += ', '.join(ctglist).decode('utf-8')+u'\nUse: ' + COMMANDS[COMM_PREFIX+parameters.strip()]['syntax'].decode("utf-8") + u'\nExample:'
-		for example in COMMANDS[COMM_PREFIX+parameters]['examples']:
+		rep += ', '.join(ctglist).decode('utf-8')+u'\nUse: ' + COMMANDS[parameters.strip()]['syntax'].decode("utf-8") + u'\nExample:'
+		for example in COMMANDS[parameters]['examples']:
 			rep += u'\n  >  ' + example.decode("utf-8")
-		rep += u'\nNecessary level of access: ' + str(COMMANDS[COMM_PREFIX+parameters.strip()]['access'])
+		rep += u'\nNecessary level of access: ' + str(COMMANDS[parameters.strip()]['access'])
 		
 		if GROUPCHATS.has_key(groupchat):
-			if COMM_PREFIX+parameters.strip() in COMMOFF[groupchat]:
+			if parameters.strip() in COMMOFF[groupchat]:
 				rep += u'\nThis command has been turned off in this conference!'
 			else:
 				pass
 	else:
-		rep = u'Write a word "%scommands" (without quotation marks), to get the list of commands, "%shelp <commands without "%s">" for the receipt of help on a command, %salias_list for a list of aliases, and %salias_acc <alias> to obtain the level of access to certain local aliases and %sgalias_acc <alias> to obtain the level of access to a specific global alias.' % (COMM_PREFIX, COMM_PREFIX, COMM_PREFIX, COMM_PREFIX, COMM_PREFIX, COMM_PREFIX)
+		rep = u'Write a word "%scommands" (without quotation marks), to get the list of commands, "%shelp <commands without "%s">" for the receipt of help on a command, %salias_list for a list of aliases, and %salias_acc <alias> to obtain the level of access to certain local aliases and %sgalias_acc <alias> to obtain the level of access to a specific global alias.'
 				
 	reply(type, source, rep)
 
@@ -85,7 +85,7 @@ def handler_help_commands(type, source, parameters):
 		if type == 'public':
 			reply(type,source,u'Look in your private!')
 
-		reply('private', source, u'List of categories on %s (total: %s):\n\n%s.\n\no view a list of commands contained in the category, type "%scommands <category>" without the quotation marks, example "%scommands *"' % (date,qcats,cats,COMM_PREFIX,COMM_PREFIX))
+		reply('private', source, u'List of categories on %s (total: %s):\n\n%s.\n\no view a list of commands contained in the category, type "%scommands <category>" without the quotation marks, example "%scommands *"' % (date,qcats,cats))
 		
-register_command_handler(handler_help_help, COMM_PREFIX+'help', ['help','info','all','*'], 0, 'Show detail information about a certain command.', COMM_PREFIX+'help [command]', [COMM_PREFIX+'help', COMM_PREFIX+'help ping'])
-register_command_handler(handler_help_commands, COMM_PREFIX+'commands', ['help','info','all','*'], 0, 'Shows the list of all of categories of commands. At the query of category shows the list of commands being in it.', COMM_PREFIX+'commands [category]', [COMM_PREFIX+'commands',COMM_PREFIX+'commands *'])
+register_command_handler(handler_help_help, 'help', ['help','info','all','*'], 0, 'Show detail information about a certain command.', 'help [command]', ['help', 'help ping'])
+register_command_handler(handler_help_commands, 'commands', ['help','info','all','*'], 0, 'Shows the list of all of categories of commands. At the query of category shows the list of commands being in it.', 'commands [category]', ['commands','commands *'])

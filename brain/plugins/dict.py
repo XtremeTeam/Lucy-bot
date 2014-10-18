@@ -38,4 +38,4 @@ def handler_dict_define(type, source, parameters):
 		reply = 'Error'
 	smsg(type, source, reply)
 
-register_command_handler(handler_dict_define, COMM_PREFIX+'define', ['fun','superadmin','muc','all'], 0, 'Defines a word using the DICT protocol.', 'define <word>', ['define neutron'])
+register_command_handler(handler_dict_define, 'define', ['fun','superadmin','muc','all'], 0, 'Defines a word using the DICT protocol.', 'define <word>', ['define neutron'])

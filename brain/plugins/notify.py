@@ -44,5 +44,5 @@ def atjoin_notify(groupchat, nick, aff, role):
 
                 
         
-register_command_handler(handler_notifyen, COMM_PREFIX+'notify', ['notify','en','all'], 10, 'lucy will send you a private message notifying you with the name of the user who joined the room immediately.\nYou can type 1 to be notified, or 0 to cancel.', 'notify <parameters 1|0>', ['notify 1'])
+register_command_handler(handler_notifyen, 'notify', ['notify','en','all'], 10, 'lucy will send you a private message notifying you with the name of the user who joined the room immediately.\nYou can type 1 to be notified, or 0 to cancel.', 'notify <parameters 1|0>', ['notify 1'])
 register_join_handler(atjoin_notify)

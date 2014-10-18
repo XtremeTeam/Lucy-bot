@@ -320,6 +320,6 @@ def handler_greetex(type,source,parameters):
 
 
 register_join_handler(atjoin_greetex)
-register_command_handler(handler_greetex, COMM_PREFIX+'greetex', ['admin','muc','all','new'], 20, 'Add greeting  according to affiliations (none, member, admin, owner).\nTo delete greeting, "gretex="', 'greetex <affiliation=greeting>', ['greetex owner=hello %NICK% welcome','greetex none=hello %NICK% welcome'])
-register_command_handler(handler_greetex_black, COMM_PREFIX+'black_list', ['superadmin','all','new'], 100, 'Add a specify user onto black list globally!!!', 'black_list [nick] [level 1 - 10]', ['black_list joyo 3'])
+register_command_handler(handler_greetex, 'greetex', ['admin','muc','all','new'], 20, 'Add greeting  according to affiliations (none, member, admin, owner).\nTo delete greeting, "gretex="', 'greetex <affiliation=greeting>', ['greetex owner=hello %NICK% welcome','greetex none=hello %NICK% welcome'])
+register_command_handler(handler_greetex_black, 'black_list', ['superadmin','all','new'], 100, 'Add a specify user onto black list globally!!!', 'black_list [nick] [level 1 - 10]', ['black_list joyo 3'])
 

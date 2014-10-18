@@ -209,19 +209,19 @@ def gmacroaccess_handler(type, source, parameters):
 			reply(type,source,u'That for delirium?')
 
 
-register_command_handler(macroadd_handler, COMM_PREFIX+'macroadd', ['admin','macro','all'], 20, 'To add macro. the macro itself should be concluded in apostrophes `` !!!', 'macroadd [The name] [`macro`]', ['macroadd Glitch `To tell /me Has thought, that all is well`'])
-register_command_handler(gmacroadd_handler, COMM_PREFIX+'gmacroadd', ['superadmin','macro','all'], 100, 'to add a global macro. the macro itself should be concluded in apostrophes `` !!!', 'gmacroadd [name] [`macro`]', ['gmacroadd Glitch `To tell /me Has thought, that all is well`'])
+register_command_handler(macroadd_handler, 'macroadd', ['admin','macro','all'], 20, 'To add macro. the macro itself should be concluded in apostrophes `` !!!', 'macroadd [The name] [`macro`]', ['macroadd Glitch `To tell /me Has thought, that all is well`'])
+register_command_handler(gmacroadd_handler, 'gmacroadd', ['superadmin','macro','all'], 100, 'to add a global macro. the macro itself should be concluded in apostrophes `` !!!', 'gmacroadd [name] [`macro`]', ['gmacroadd Glitch `To tell /me Has thought, that all is well`'])
 
-register_command_handler(macrodel_handler, COMM_PREFIX+'macrodel', ['admin','macro','all'], 20, 'delete a macro.', 'macrodel [name]', ['macrodel glitch'])
-register_command_handler(gmacrodel_handler, COMM_PREFIX+'gmacrodel', ['superadmin','macro','all'], 100, 'to delete a global macro.', 'macrodel [name of macro]', ['macrodel glitch'])
+register_command_handler(macrodel_handler, 'macrodel', ['admin','macro','all'], 20, 'delete a macro.', 'macrodel [name]', ['macrodel glitch'])
+register_command_handler(gmacrodel_handler, 'gmacrodel', ['superadmin','macro','all'], 100, 'to delete a global macro.', 'macrodel [name of macro]', ['macrodel glitch'])
 
-register_command_handler(macroexpand_handler, COMM_PREFIX+'macroexp', ['admin','macro','info','all'], 20, 'To develop macro, i.e. to look at ready macro in a crude kind.', 'macroexp [name] [Parameters]', ['macroexp administrator bot'])
-register_command_handler(gmacroexpand_handler, COMM_PREFIX+'gmacroexp', ['superadmin','macro','info','all'], 100, 'To develop global macro, i.e. to look at ready macro in a crude kind.', 'gmacroexp [name of macro] [Parameters]', ['gmacroexp administrator bot'])
+register_command_handler(macroexpand_handler, 'macroexp', ['admin','macro','info','all'], 20, 'To develop macro, i.e. to look at ready macro in a crude kind.', 'macroexp [name] [Parameters]', ['macroexp administrator bot'])
+register_command_handler(gmacroexpand_handler, 'gmacroexp', ['superadmin','macro','info','all'], 100, 'To develop global macro, i.e. to look at ready macro in a crude kind.', 'gmacroexp [name of macro] [Parameters]', ['gmacroexp administrator bot'])
 
-register_command_handler(macroinfo_handler, COMM_PREFIX+'macroinfo', ['admin','macro','info','all'], 20, 'to view a certain macro.', 'macroinfo [name]', ['macroinfo glitch','macroinfo allmac'])
-register_command_handler(gmacroinfo_handler, COMM_PREFIX+'gmacroinfo', ['superadmin','macro','info','all'], 100, 'to view a global macro (any), т.е. to look at all macros write "allmac" .', 'macroinfo [name]', ['macroinfo glitch','macroinfo allmac'])
+register_command_handler(macroinfo_handler, 'macroinfo', ['admin','macro','info','all'], 20, 'to view a certain macro.', 'macroinfo [name]', ['macroinfo glitch','macroinfo allmac'])
+register_command_handler(gmacroinfo_handler, 'gmacroinfo', ['superadmin','macro','info','all'], 100, 'to view a global macro (any), т.е. to look at all macros write "allmac" .', 'macroinfo [name]', ['macroinfo glitch','macroinfo allmac'])
 
-register_command_handler(macrolist_handler, COMM_PREFIX+'macrolist', ['help','macro','info','all'], 10, 'view all macros. sent to private', 'macrolist', ['macrolist'])
+register_command_handler(macrolist_handler, 'macrolist', ['help','macro','info','all'], 10, 'view all macros. sent to private', 'macrolist', ['macrolist'])
 
-register_command_handler(macroaccess_handler, COMM_PREFIX+'macroaccess', ['admin','macro','all'], 20, 'To change access to certain macro.', 'macroaccess [macro] [access]', ['macroaccess glitch 10'])
-register_command_handler(gmacroaccess_handler, COMM_PREFIX+'gmacroaccess', ['superadmin','macro','all'], 100, 'to change access to a certain global macro (any).', 'gmacroaccess [macro] [access]', ['macroaccess glitch 20'])
+register_command_handler(macroaccess_handler, 'macroaccess', ['admin','macro','all'], 20, 'To change access to certain macro.', 'macroaccess [macro] [access]', ['macroaccess glitch 10'])
+register_command_handler(gmacroaccess_handler, 'gmacroaccess', ['superadmin','macro','all'], 100, 'to change access to a certain global macro (any).', 'gmacroaccess [macro] [access]', ['macroaccess glitch 20'])

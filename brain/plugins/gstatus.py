@@ -29,4 +29,4 @@ def status_change_tmp(type, source, parameters):
                 change_bot_status(GCH, OLD_STATUS[GCH]['stmsg'], OLD_STATUS[GCH]['status'])
         reply(type, source, u'Status in the same position!')
 
-register_command_handler(status_change_tmp, COMM_PREFIX+'gstatus', ['admin','all'], 100, 'Global change of status with the notice for 30 seconds', 'gstatus [notice]', ['gstatus Hello'])
+register_command_handler(status_change_tmp, 'gstatus', ['admin','all'], 100, 'Global change of status with the notice for 30 seconds', 'gstatus [notice]', ['gstatus Hello'])

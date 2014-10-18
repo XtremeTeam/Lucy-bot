@@ -51,10 +51,10 @@ def handler_bing_bing(type, source, parameters):
 
 try:
 	import json
-	register_command_handler(handler_bing_bing, COMM_PREFIX+'bing', ['fun','all'], 0, 'search in bing.', 'bing <query>', ['search something'])
+	register_command_handler(handler_bing_bing, 'bing', ['fun','all'], 0, 'search in bing.', 'bing <query>', ['search something'])
 except ImportError:
 	try:
 		import simplejson as json
-		register_command_handler(handler_bing_bing, COMM_PREFIX+'bing', ['fun','all'], 0, 'search on bing.', 'bing <query>', ['search something'])
+		register_command_handler(handler_bing_bing, 'bing', ['fun','all'], 0, 'search on bing.', 'bing <query>', ['search something'])
 	except:
 		print '====================================================\nYou need Python 2.6.x or simple_json package installed to use bing_plugin.py!!!\n====================================================\n'

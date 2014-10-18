@@ -53,4 +53,4 @@ def second_handler_SG(coze,stats,parameters,type,source):
 			
 		reply(type,source,result.strip())
 		
-register_command_handler(handler_SG_get, COMM_PREFIX+'info', ['info','all','*'], 10, 'Returns statistics about the server of use Xep-0039.', COMM_PREFIX+'info <server>', [COMM_PREFIX+'info xtreme.im'])
+register_command_handler(handler_SG_get, 'info', ['info','all','*'], 10, 'Returns statistics about the server of use Xep-0039.', 'info <server>', ['info xtreme.im'])

@@ -43,4 +43,4 @@ def handler_complaint(type, source, parameters):
 			else:
 				reply(type,source,u'are you sure, that <'+nick+u'>is her? Huh!!?')
 				
-register_command_handler(handler_complaint, COMM_PREFIX+'complaint',  ['muc','all'], 10, 'To complain on certain nick for the certain reason. Works only for me in private!', 'complaint <nick> <reason>', ['complaint Nick7 flooding'])
+register_command_handler(handler_complaint, 'complaint',  ['muc','all'], 10, 'To complain on certain nick for the certain reason. Works only for me in private!', 'complaint <nick> <reason>', ['complaint Nick7 flooding'])

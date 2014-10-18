@@ -124,4 +124,4 @@ def handler_get_file_answ(coze,resp,type,source,sid,to,fp):
 		os.remove(name)
 		reply(type, source, u'Invalid syntax!')
 
-register_command_handler(handler_get_file, COMM_PREFIX+'get_file', ['info','wtf','all','*'], 11, 'Downloaded a file from the network via Jabber.', COMM_PREFIX+'get_file <URL>', [COMM_PREFIX+'get_file http://files.com/file.ext'])
+register_command_handler(handler_get_file, 'get_file', ['info','wtf','all','*'], 11, 'Downloaded a file from the network via Jabber.', 'get_file <URL>', ['get_file http://files.com/file.ext'])

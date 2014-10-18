@@ -37,4 +37,4 @@ def handler_ext(type, source, parameters):
 def decode(text):
     return strip_tags.sub('', text.replace('<br />','').replace('<br>','')).replace('&nbsp;', ' ').replace('&lt;', '<').replace('&gt;', '>').replace('&quot;', '"').replace('\t','').replace('||||:]','').replace('>[:\n','')
 
-register_command_handler(handler_ext, COMM_PREFIX+'ext', ['all'], 0, 'find description of extention ', 'ext <word>', ['ext rar'])
+register_command_handler(handler_ext, 'ext', ['all'], 0, 'find description of extention ', 'ext <word>', ['ext rar'])

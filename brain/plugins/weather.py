@@ -62,5 +62,5 @@ def handler_weather_weathercode(type, source, parameters):
 	else:
 		reply(type, source, u'хз')
 
-register_command_handler(handler_weather_weather, COMM_PREFIX+'weather', ['info','all'], 10, 'Looks up weather from NOAA', COMM_PREFIX+'Weather <weather code>', ['weather ukhh'])
-register_command_handler(handler_weather_weathercode, COMM_PREFIX+'wcode', ['info','all'], 10, 'Shows a code of city for viewing weather', COMM_PREFIX+'weathercode <city>', ['weathercode orel'])
+register_command_handler(handler_weather_weather, 'weather', ['info','all'], 10, 'Looks up weather from NOAA', 'Weather <weather code>', ['weather ukhh'])
+register_command_handler(handler_weather_weathercode, 'wcode', ['info','all'], 10, 'Shows a code of city for viewing weather', 'weathercode <city>', ['weathercode orel'])

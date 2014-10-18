@@ -51,10 +51,10 @@ def handler_google_google(type, source, parameters):
 
 try:
 	import json
-	register_command_handler(handler_google_google, COMM_PREFIX+'google', ['fun','all'], 0, 'search in google.', COMM_PREFIX+'google <query>', [COMM_PREFIX+'google something'])
+	register_command_handler(handler_google_google, 'google', ['fun','all'], 0, 'search in google.', 'google <query>', ['google something'])
 except ImportError:
 	try:
 		import simplejson as json
-		register_command_handler(handler_google_google, COMM_PREFIX+'google', ['fun','all'], 0, 'search in google.', COMM_PREFIX+'google <query>', [COMM_PREFIX+'google something'])
+		register_command_handler(handler_google_google, 'google', ['fun','all'], 0, 'search in google.', 'google <query>', ['google something'])
 	except:
 		print '====================================================\nYou need Python 2.6.x or simple_json package installed to use google_plugin.py!!!\n====================================================\n'

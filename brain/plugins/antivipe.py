@@ -144,7 +144,7 @@ def avipe_init(groupchat):
 		
 register_presence_handler(avipe_prs)
 register_join_handler(avipe_join)
-register_command_handler(avipe_call, COMM_PREFIX+'antivipe', ['all', 'admin'], 100, 'aktif/non-aktif fungsi perlindungan terhadap vipe attacks.\nSetting default adalah OFF.', 'antivipe [<1/on/||0/off/]', ['antivipe on','antivipe off'])
+register_command_handler(avipe_call, 'antivipe', ['all', 'admin'], 100, 'aktif/non-aktif fungsi perlindungan terhadap vipe attacks.\nSetting default adalah OFF.', 'antivipe [<1/on/||0/off/]', ['antivipe on','antivipe off'])
 register_stage1_init(avipe_init)	
 
 

@@ -64,8 +64,8 @@ def remote(type, source, parameters):
 		
 		dest_source = [groupchat+'/'+nick,dest_gch,bot_nick]
 		
-		if COMMAND_HANDLERS.has_key(COMM_PREFIX+dest_comm.lower()):
-			comm_hnd = COMMAND_HANDLERS[COMM_PREFIX+dest_comm.lower()]
+		if COMMAND_HANDLERS.has_key(dest_comm.lower()):
+			comm_hnd = COMMAND_HANDLERS[dest_comm.lower()]
 		elif MACROS.macrolist[dest_gch].has_key(dest_comm.lower()):
 			exp_alias = MACROS.expand(dest_comm.lower(), dest_source)
 			
@@ -142,8 +142,8 @@ def redirect(type, source, parameters):
 			
 			dest_source = [groupchat+'/'+dest_nick,groupchat,bot_nick]
 			
-			if COMMAND_HANDLERS.has_key(COMM_PREFIX+comm.lower()):
-				comm_hnd = COMMAND_HANDLERS[COMM_PREFIX+comm.lower()]
+			if COMMAND_HANDLERS.has_key(comm.lower()):
+				comm_hnd = COMMAND_HANDLERS[comm.lower()]
 			elif MACROS.macrolist[groupchat].has_key(comm.lower()):
 				exp_alias = MACROS.expand(comm.lower(), dest_source)
 				
@@ -304,7 +304,7 @@ def glob_msg_help(type, source, parameters):
 		gch=GROUPCHATS.keys()
 		for x in gch:
 			if popups_check(x):
-				msg(x, u'News from '+source[2]+u':\n'+parameters+u'\nI remind that as usual all a help can be got writing with "%shelp".\nAbout all of bugs, errors, suggestions and structural criticism, please to send me: write "%stell botadmin <text_message>", naturally without quotation marks.\nTHANKS FOR YOUR ATTENTION!' % (COMM_PREFIX,COMM_PREFIX))
+				msg(x, u'News from '+source[2]+u':\n'+parameters+u'\nI remind that as usual all a help can be got writing with "%shelp".\nAbout all of bugs, errors, suggestions and structural criticism, please to send me: write "%stell botadmin <text_message>", naturally without quotation marks.\nTHANKS FOR YOUR ATTENTION!')
 				
 				totalblock = int(totalblock) + 1
 			total = int(total) + 1
@@ -508,9 +508,9 @@ def autoaway_state(gch):
 """		
 def set_default_gch_status(gch):
 	if isinstance(GCHCFGS[gch].get('status'), str): #temp workaround
-		GCHCFGS[gch]['status']={'status': u'write "%shelp" and follow the instructions to understand how to work with me!' % (COMM_PREFIX), 'show': u''}
+		GCHCFGS[gch]['status']={'status': u'write "%shelp" and follow the instructions to understand how to work with me!' % (), 'show': u''}
 	elif not isinstance(GCHCFGS[gch].get('status'), dict):
-		GCHCFGS[gch]['status']={'status': u'write "%shelp" and follow the instructions to understand how to work with me!' % (COMM_PREFIX), 'show': u''}
+		GCHCFGS[gch]['status']={'status': u'write "%shelp" and follow the instructions to understand how to work with me!' % (), 'show': u''}
 """
 def delivery(type,source,body):
 	sender_jid = source[1]
@@ -544,20 +544,20 @@ def delivery(type,source,body):
 					msg(adli,rep)
 
 				
-register_command_handler(lucy_join, COMM_PREFIX+'join', ['superadmin','muc','all','*'], 0, 'Join to a conference, if there is a password write that password right after the name of conference.', COMM_PREFIX+'join <conference> [pass=1234] [botnick]', [COMM_PREFIX+'join botzone@conference.jabberuk.dyndns.org', COMM_PREFIX+'join join botzone@conference.jsmart.web.id somebot', COMM_PREFIX+'join join botzone@conference.jsmart.web.id pass=1234 somebot'])
-register_command_handler(lucy_leave, COMM_PREFIX+'leave', ['admin','muc','all','*'], 40, 'Leave bot from the current or a specific conference.', COMM_PREFIX+'leave <conference> [reason]', [COMM_PREFIX+'leave botzone@conference.jabberuk.dyndns.org (reason = sleep', COMM_PREFIX+'leave sleep',COMM_PREFIX+'leave'])
-register_command_handler(admin_msg, COMM_PREFIX+'amsg', ['admin','muc','all','*'], 40, 'Send message on behalf of bot to a certain JID.', COMM_PREFIX+'message <jid> <message>', [COMM_PREFIX+'message guy@jsmart.web.id how are you?'])
-#register_command_handler(admin_say, COMM_PREFIX+'say', ['admin','muc','all','*'], 20, 'Talk through bot.', COMM_PREFIX+'say <message>', [COMM_PREFIX+'say *HI* peoples'])
-register_command_handler(lucy_reload , COMM_PREFIX+'reboot', ['superadmin','all','*'], 100, 'Restart bot.', COMM_PREFIX+'restart [reason]', [COMM_PREFIX+'restart',COMM_PREFIX+'restart refreshing!'])
-register_command_handler(lucy_shdwn, COMM_PREFIX+'shutd', ['superadmin','all','*'], 100, 'Shuts the bot down.', COMM_PREFIX+'halt [reason]', [COMM_PREFIX+'halt',COMM_PREFIX+'halt fixing bug!'])
-register_command_handler(glob_msg, COMM_PREFIX+'globmsg', ['superadmin','muc','all','*'], 100, 'Send message to all conference, where the bot exist.', COMM_PREFIX+'globmsg [message]', [COMM_PREFIX+'globmsg hi all!'])
-register_command_handler(glob_msg_help, COMM_PREFIX+'hglobmsg', ['superadmin','muc','all','*'], 100, 'Send message to all conference, where the bot exist. The message will contain a header with a short pre help.', COMM_PREFIX+'hglobmsg [message]', [COMM_PREFIX+'hglobmsg hi all!'])
-register_command_handler(popups_onoff, COMM_PREFIX+'popups', ['admin','muc','all','*'], 30, 'Off (0) and On (1) message about join/leaves, restarts/off, and also global news for certain conf. Without a parameter the bot will based on current state.', COMM_PREFIX+'popups [1|0]', [COMM_PREFIX+'popups 1',COMM_PREFIX+'popups'])
-#register_command_handler(handler_botautoaway_onoff, COMM_PREFIX+'autoaway', ['admin','muc','all','*'], 30, 'Off (0) and On (1) auto-status away due to abscence of commands within 10 minutes, without an option it will show current status.', COMM_PREFIX+'autoaway [1|0]', [COMM_PREFIX+'autoaway 1',COMM_PREFIX+'autoaway'])
-register_command_handler(change_status, COMM_PREFIX+'set_status', ['admin','muc','all','*'], 100, 'Change bot status in the current conference, if two parameters are not mentioned, bots will use the default status.', COMM_PREFIX+'set_status [online|chat|away|xa|dnd] [message]', [COMM_PREFIX+'set_status away',COMM_PREFIX+'set_status away go to work'])
-register_command_handler(set_nick, COMM_PREFIX+'rename', ['superadmin','muc','all','*'], 100, 'Changes the bot nickname in the current conference.', COMM_PREFIX+'set_nick <nick>', [COMM_PREFIX+'set_nick somebot'])
-register_command_handler(remote, COMM_PREFIX+'remote', ['superadmin','muc','all','*'], 100, 'Allows you to remotely execute commands and aliases in other conferences on behalf of the bot and get the result. Without parameters displays a list of conferences with the numbers, instead of the full name of the conference can use a number from the list.', COMM_PREFIX+'remote <groupchat|number from the list> <comm> <parameters>', [COMM_PREFIX+'remote botzone@conference.jsmart.web.id.aq ping guy',COMM_PREFIX+'remote 2 time guy',COMM_PREFIX+'remote'])
-register_command_handler(redirect, COMM_PREFIX+'redirect', ['admin','muc','all','*'], 20, 'Redirects the result of a command or an alias to the specified user in private. If the alias or command is not specified and instead the text, or any false, then sends the user a message.', COMM_PREFIX+'redirect <nick>:<command>[<params>]|<mess>', [COMM_PREFIX+'redirect guy: ping lady'])
+register_command_handler(lucy_join, 'join', ['superadmin','muc','all','*'], 0, 'Join to a conference, if there is a password write that password right after the name of conference.', 'join <conference> [pass=1234] [botnick]', ['join botzone@conference.jabberuk.dyndns.org', 'join join botzone@conference.jsmart.web.id somebot', 'join join botzone@conference.jsmart.web.id pass=1234 somebot'])
+register_command_handler(lucy_leave, 'leave', ['admin','muc','all','*'], 40, 'Leave bot from the current or a specific conference.', 'leave <conference> [reason]', ['leave botzone@conference.jabberuk.dyndns.org (reason = sleep', 'leave sleep','leave'])
+register_command_handler(admin_msg, 'amsg', ['admin','muc','all','*'], 40, 'Send message on behalf of bot to a certain JID.', 'message <jid> <message>', ['message guy@jsmart.web.id how are you?'])
+#register_command_handler(admin_say, 'say', ['admin','muc','all','*'], 20, 'Talk through bot.', 'say <message>', ['say *HI* peoples'])
+register_command_handler(lucy_reload , 'reboot', ['superadmin','all','*'], 100, 'Restart bot.', 'restart [reason]', ['restart','restart refreshing!'])
+register_command_handler(lucy_shdwn, 'shutd', ['superadmin','all','*'], 100, 'Shuts the bot down.', 'halt [reason]', ['halt','halt fixing bug!'])
+register_command_handler(glob_msg, 'globmsg', ['superadmin','muc','all','*'], 100, 'Send message to all conference, where the bot exist.', 'globmsg [message]', ['globmsg hi all!'])
+register_command_handler(glob_msg_help, 'hglobmsg', ['superadmin','muc','all','*'], 100, 'Send message to all conference, where the bot exist. The message will contain a header with a short pre help.', 'hglobmsg [message]', ['hglobmsg hi all!'])
+register_command_handler(popups_onoff, 'popups', ['admin','muc','all','*'], 30, 'Off (0) and On (1) message about join/leaves, restarts/off, and also global news for certain conf. Without a parameter the bot will based on current state.', 'popups [1|0]', ['popups 1','popups'])
+#register_command_handler(handler_botautoaway_onoff, 'autoaway', ['admin','muc','all','*'], 30, 'Off (0) and On (1) auto-status away due to abscence of commands within 10 minutes, without an option it will show current status.', 'autoaway [1|0]', ['autoaway 1','autoaway'])
+register_command_handler(change_status, 'set_status', ['admin','muc','all','*'], 100, 'Change bot status in the current conference, if two parameters are not mentioned, bots will use the default status.', 'set_status [online|chat|away|xa|dnd] [message]', ['set_status away','set_status away go to work'])
+register_command_handler(set_nick, 'rename', ['superadmin','muc','all','*'], 100, 'Changes the bot nickname in the current conference.', 'set_nick <nick>', ['set_nick somebot'])
+register_command_handler(remote, 'remote', ['superadmin','muc','all','*'], 100, 'Allows you to remotely execute commands and aliases in other conferences on behalf of the bot and get the result. Without parameters displays a list of conferences with the numbers, instead of the full name of the conference can use a number from the list.', 'remote <groupchat|number from the list> <comm> <parameters>', ['remote botzone@conference.jsmart.web.id.aq ping guy','remote 2 time guy','remote'])
+register_command_handler(redirect, 'redirect', ['admin','muc','all','*'], 20, 'Redirects the result of a command or an alias to the specified user in private. If the alias or command is not specified and instead the text, or any false, then sends the user a message.', 'redirect <nick>:<command>[<params>]|<mess>', ['redirect guy: ping lady'])
 
 register_stage1_init(autoaway_state)
 #register_stage1_init(set_default_gch_status)

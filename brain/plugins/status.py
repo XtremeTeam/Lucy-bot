@@ -52,4 +52,4 @@ def status_change(prs):
 
 register_presence_handler(status_change)
 
-register_command_handler(handler_status,  COMM_PREFIX+'status', ['info','muc','all','*'], 0, 'Shows the status and status message (if any) specified nick.',  COMM_PREFIX+'status <user>', [ COMM_PREFIX+'status',  COMM_PREFIX+'status guy'])
+register_command_handler(handler_status,  'status', ['info','muc','all','*'], 0, 'Shows the status and status message (if any) specified nick.',  'status <user>', [ 'status',  'status guy'])

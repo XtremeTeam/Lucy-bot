@@ -34,4 +34,4 @@ def handler_fact_tld(type, source, parameters):
 	result = fact_tld(parameters.strip())
 	reply(type, source, result)
 
-register_command_handler(handler_fact_tld, COMM_PREFIX+'tld', ['info','all','*'], 10, 'Shows the presence of first level domain (geographical).', COMM_PREFIX+'tld <accronim/country>', [COMM_PREFIX+'tld id', COMM_PREFIX+'tld indonesia'])
+register_command_handler(handler_fact_tld, 'tld', ['info','all','*'], 10, 'Shows the presence of first level domain (geographical).', 'tld <accronim/country>', ['tld id', 'tld indonesia'])

@@ -101,6 +101,6 @@ def update_work(state=None, known=None, actual=None):
 def decode(text):
     return strip_tags.sub('', text.replace('<br>','\n')).replace('&nbsp;', ' ').replace('&lt;', '<').replace('&gt;', '>').replace('&quot;', '"').replace('\t','').replace('>[:\n','')
 
-register_command_handler(handler_update_lastrev, COMM_PREFIX+'update', ['info','superadmin','all'], 100, 'Shows last audit of bot in it SVN to branch trunk. Parameters:\n+ TO INCLUDE updates about new audits (Check each hour)\n- TO DISCONNECT updates about new audits\n* To put a mark that is known to you about updating. Reminders on new audit will be gone before occurrence newer', 'botupd<+/*>', ['botupd +','botupd *','botupd -'])
+register_command_handler(handler_update_lastrev, 'update', ['info','superadmin','all'], 100, 'Shows last audit of bot in it SVN to branch trunk. Parameters:\n+ TO INCLUDE updates about new audits (Check each hour)\n- TO DISCONNECT updates about new audits\n* To put a mark that is known to you about updating. Reminders on new audit will be gone before occurrence newer', 'botupd<+/*>', ['botupd +','botupd *','botupd -'])
 register_stage2_init(update_lastrev_autonotify)
 register_stage0_init(get_update_autonotify_state)

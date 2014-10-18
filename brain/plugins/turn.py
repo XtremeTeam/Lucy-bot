@@ -33,7 +33,7 @@ def handler_turn_last(type, source, parameters):
 			reply(type,source,u' And you still did not say anything!')
 			return
 
-		if turn_msgs[groupchat][jid] == u'%sturn' % (COMM_PREFIX):
+		if turn_msgs[groupchat][jid] == u'%sturn' % ():
 			reply(type,source,u'А вот фиг!')
 			return
 		
@@ -59,4 +59,4 @@ def handler_turn_join(groupchat, nick, aff, role):
 register_message_handler(handler_turn_save_msg)
 register_join_handler(handler_turn_join)
 
-register_command_handler(handler_turn_last, COMM_PREFIX+'turn', ['muc','all','*'], 10, 'Switch layout for the last message for the user of causing command.', COMM_PREFIX+'turn', [COMM_PREFIX+'turn'])
+register_command_handler(handler_turn_last, 'turn', ['muc','all','*'], 10, 'Switch layout for the last message for the user of causing command.', 'turn', ['turn'])

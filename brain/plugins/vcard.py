@@ -197,9 +197,9 @@ def handler_novcard_mess(type, source, parameters):
 	else:
 		reply(type,source,u'Message in response to the empty of vCard: '+GCHCFGS[groupchat]['novcard']['mess'])
 
-register_command_handler(handler_novcard_mess, COMM_PREFIX+'novc_mess', ['muc','info','all','*'], 20, 'Sets or displays a message in reaction to an empty vCard.', COMM_PREFIX+'novc_mess <message>', [COMM_PREFIX+'novc_mess Fill your vCard, then talk!',COMM_PREFIX+'novc_mess'])
-register_command_handler(handler_novcard_res, COMM_PREFIX+'novc_res', ['muc','info','all','*'], 20, 'Sets or shows the reaction of a bot on an empty vCard.', COMM_PREFIX+'novc_res [ignore|kick|ban|visitor]', [COMM_PREFIX+'novc_res kick',COMM_PREFIX+'novc_res ban',COMM_PREFIX+'novc_res'])
-register_command_handler(handler_vcardget, COMM_PREFIX+'vcard', ['muc','info','all','*'], 10, 'Displays the specified user vCard.', COMM_PREFIX+'vcard [nick]', [COMM_PREFIX+'vcard guy',COMM_PREFIX+'vcard'])
+register_command_handler(handler_novcard_mess, 'novc_mess', ['muc','info','all','*'], 20, 'Sets or displays a message in reaction to an empty vCard.', 'novc_mess <message>', ['novc_mess Fill your vCard, then talk!','novc_mess'])
+register_command_handler(handler_novcard_res, 'novc_res', ['muc','info','all','*'], 20, 'Sets or shows the reaction of a bot on an empty vCard.', 'novc_res [ignore|kick|ban|visitor]', ['novc_res kick','novc_res ban','novc_res'])
+register_command_handler(handler_vcardget, 'vcard', ['muc','info','all','*'], 10, 'Displays the specified user vCard.', 'vcard [nick]', ['vcard guy','vcard'])
 
 register_stage1_init(get_novcard_state)
 register_join_handler(handler_novcard_join)

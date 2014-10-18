@@ -216,7 +216,7 @@ def handler_pai(type, source, body):
 										body = body.replace(I,'%nick%')
 										break
 							
-							if not body[0] in [COMM_PREFIX,'*','.','-','!']:
+							if not body[0] in ['*','.','-','!']:
 								save_phrase(body, groupchat)
 						
 					if rep:
@@ -260,7 +260,7 @@ def handler_pai(type, source, body):
 											body = body.replace(I,'%nick%')
 											break
 							
-								if not body[0] in [COMM_PREFIX,'*','.','-','!']:
+								if not body[0] in ['*','.','-','!']:
 									save_phrase(body, groupchat)
 						
 						if rep:
@@ -681,18 +681,18 @@ def handler_pai_show(type, source, parameters):
 
 #-------------------------------------Handlers---------------------------------------------
 
-register_command_handler(handler_pai_control, COMM_PREFIX+'pai', ['fun','muc','all','*'], 30, 'Enables or disables chatter bot, that displays random phrases in messages users. Without parameters shows the current value.', COMM_PREFIX+'pai <1|0>', [COMM_PREFIX+'pai 1',COMM_PREFIX+'pai 0',COMM_PREFIX+'pai'])
-register_command_handler(handler_pai_learn, COMM_PREFIX+'pai_learn', ['fun','muc','all','*'], 30, 'Enables or disables learning chatter bot, i.e saves the message in the database of users, which reacts. Without parameters shows the current value.', COMM_PREFIX+'pai_learn <1|0>', [COMM_PREFIX+'pai_learn 1',COMM_PREFIX+'pai_learn 0',COMM_PREFIX+'pai_learn'])
-register_command_handler(handler_pai_occ, COMM_PREFIX+'pai_occ', ['fun','muc','all','*'], 30, 'Sets the level of chatter bot in percentage from 0% to 100%, i.e The higher the value, the more the bot will talk. Without parameters shows the current value.', COMM_PREFIX+'pai_occ <0-100>', [COMM_PREFIX+'pai_occ 50',COMM_PREFIX+'pai_occ 10',COMM_PREFIX+'pai_occ'])
-register_command_handler(handler_pai_think, COMM_PREFIX+'pai_think', ['fun','muc','all','*'], 30, 'Sets the time to think of phrases users from 3 to 100 seconds, i.e minimum time for reflection - 4 seconds. Without parameters shows the current value.', COMM_PREFIX+'pai_think <4-100>', [COMM_PREFIX+'pai_think 10',COMM_PREFIX+'pai_think 4',COMM_PREFIX+'pai_think'])
-register_command_handler(handler_pai_ron, COMM_PREFIX+'pai_ron', ['fun','muc','all','*'], 30, 'Adds to the list of words which reacts bot, that is is interested in the bot to a particular topic. Add words must be separated by a space! Without this parameter displays a list.', COMM_PREFIX+'pai_ron [word1 word2 ... words]', [COMM_PREFIX+'pai_ron master',COMM_PREFIX+'pai_ron pai_ron Bots are good for conference',COMM_PREFIX+'pai_ron'])
-register_command_handler(handler_pai_roff, COMM_PREFIX+'pai_roff', ['fun','muc','all','*'], 30, 'Adds to the list of words that ignores the bot, i.e topics that are not interested in the bot. If you add a nickname, it will ignore posts with this nickname. Add words must be separated by a space! Without this parameter displays a list.', COMM_PREFIX+'pai_roff [word1 word2 ... words]', [COMM_PREFIX+'pai_roff master',COMM_PREFIX+'pai_roff pai_ron Bots are good for conference',COMM_PREFIX+'pai_roff'])
-register_command_handler(handler_pai_rond, COMM_PREFIX+'pai_rond', ['fun','muc','all','*'], 30, 'Deletes a word from the list of words which reacts bot, i.e bot no longer interested at this or that topic. Without parameters clears the list!', COMM_PREFIX+'pai_rond [слово]', [COMM_PREFIX+'pai_rond master',COMM_PREFIX+'pai_rond'])
-register_command_handler(handler_pai_roffd, COMM_PREFIX+'pai_roffd', ['fun','muc','all','*'], 30, 'Deletes a word from the list of words that ignores the boat, i.e bot no longer ignore the message with these words. Without parameters clears the list!', COMM_PREFIX+'pai_roffd [слово]', [COMM_PREFIX+'pai_roffd master',COMM_PREFIX+'pai_roffd'])
-register_command_handler(handler_pai_add, COMM_PREFIX+'pai_add', ['fun','muc','all','*'], 30, 'Adds a phrase as base, i.e phrase which the bot will respond to messages from users!', COMM_PREFIX+'pai_add <phrase>', [COMM_PREFIX+'pai_add That is good',COMM_PREFIX+'pai_add Ehehehe'])
-register_command_handler(handler_pai_del, COMM_PREFIX+'pai_del', ['fun','muc','all','*'], 30, 'Removes a phrase from the base by its number. No parameters removes the last sentence, which the bot replied to the message, the user, in the current conference', COMM_PREFIX+'pai_del <id>', [COMM_PREFIX+'pai_del 10',COMM_PREFIX+'pai_del'])
-register_command_handler(handler_pai_count, COMM_PREFIX+'pai_count', ['fun','muc','all','*'], 30, 'Shows the number of phrases in the database.', COMM_PREFIX+'pai_count', [COMM_PREFIX+'pai_count'])
-register_command_handler(handler_pai_show, COMM_PREFIX+'pai_show', ['fun','muc','all','*'], 30, 'Lets you view it in the database. Without parameters displays the first 10 sentences, if more than 10, or all if they are less than 10 and 10 if they total 10. When you specify a number displays the phrase with that number. When specifying a range in the format <start>-<end> displays the phrase beginning with a specified boundary <start> and to the number specified boundary <end>. When referring to the text, trying to find it in the database in which there is overlap with the text, displays the first 10 found words.', COMM_PREFIX+'pai_show [<number>|<start>-<end>|<text>]', [COMM_PREFIX+'pai_show',COMM_PREFIX+'pai_show 4',COMM_PREFIX+'pai_show 3-8',COMM_PREFIX+'pai_show any'])
+register_command_handler(handler_pai_control, 'pai', ['fun','muc','all','*'], 30, 'Enables or disables chatter bot, that displays random phrases in messages users. Without parameters shows the current value.', 'pai <1|0>', ['pai 1','pai 0','pai'])
+register_command_handler(handler_pai_learn, 'pai_learn', ['fun','muc','all','*'], 30, 'Enables or disables learning chatter bot, i.e saves the message in the database of users, which reacts. Without parameters shows the current value.', 'pai_learn <1|0>', ['pai_learn 1','pai_learn 0','pai_learn'])
+register_command_handler(handler_pai_occ, 'pai_occ', ['fun','muc','all','*'], 30, 'Sets the level of chatter bot in percentage from 0% to 100%, i.e The higher the value, the more the bot will talk. Without parameters shows the current value.', 'pai_occ <0-100>', ['pai_occ 50','pai_occ 10','pai_occ'])
+register_command_handler(handler_pai_think, 'pai_think', ['fun','muc','all','*'], 30, 'Sets the time to think of phrases users from 3 to 100 seconds, i.e minimum time for reflection - 4 seconds. Without parameters shows the current value.', 'pai_think <4-100>', ['pai_think 10','pai_think 4','pai_think'])
+register_command_handler(handler_pai_ron, 'pai_ron', ['fun','muc','all','*'], 30, 'Adds to the list of words which reacts bot, that is is interested in the bot to a particular topic. Add words must be separated by a space! Without this parameter displays a list.', 'pai_ron [word1 word2 ... words]', ['pai_ron master','pai_ron pai_ron Bots are good for conference','pai_ron'])
+register_command_handler(handler_pai_roff, 'pai_roff', ['fun','muc','all','*'], 30, 'Adds to the list of words that ignores the bot, i.e topics that are not interested in the bot. If you add a nickname, it will ignore posts with this nickname. Add words must be separated by a space! Without this parameter displays a list.', 'pai_roff [word1 word2 ... words]', ['pai_roff master','pai_roff pai_ron Bots are good for conference','pai_roff'])
+register_command_handler(handler_pai_rond, 'pai_rond', ['fun','muc','all','*'], 30, 'Deletes a word from the list of words which reacts bot, i.e bot no longer interested at this or that topic. Without parameters clears the list!', 'pai_rond [слово]', ['pai_rond master','pai_rond'])
+register_command_handler(handler_pai_roffd, 'pai_roffd', ['fun','muc','all','*'], 30, 'Deletes a word from the list of words that ignores the boat, i.e bot no longer ignore the message with these words. Without parameters clears the list!', 'pai_roffd [слово]', ['pai_roffd master','pai_roffd'])
+register_command_handler(handler_pai_add, 'pai_add', ['fun','muc','all','*'], 30, 'Adds a phrase as base, i.e phrase which the bot will respond to messages from users!', 'pai_add <phrase>', ['pai_add That is good','pai_add Ehehehe'])
+register_command_handler(handler_pai_del, 'pai_del', ['fun','muc','all','*'], 30, 'Removes a phrase from the base by its number. No parameters removes the last sentence, which the bot replied to the message, the user, in the current conference', 'pai_del <id>', ['pai_del 10','pai_del'])
+register_command_handler(handler_pai_count, 'pai_count', ['fun','muc','all','*'], 30, 'Shows the number of phrases in the database.', 'pai_count', ['pai_count'])
+register_command_handler(handler_pai_show, 'pai_show', ['fun','muc','all','*'], 30, 'Lets you view it in the database. Without parameters displays the first 10 sentences, if more than 10, or all if they are less than 10 and 10 if they total 10. When you specify a number displays the phrase with that number. When specifying a range in the format <start>-<end> displays the phrase beginning with a specified boundary <start> and to the number specified boundary <end>. When referring to the text, trying to find it in the database in which there is overlap with the text, displays the first 10 found words.', 'pai_show [<number>|<start>-<end>|<text>]', ['pai_show','pai_show 4','pai_show 3-8','pai_show any'])
 
 register_stage1_init(get_pai_state)
 register_message_handler(handler_pai)

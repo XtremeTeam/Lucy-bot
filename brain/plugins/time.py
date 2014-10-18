@@ -201,4 +201,4 @@ def gettime_xep0202_answ(coze, res, nick, type, source):
 	else:
 		reply(type,source, u'Something wrong...')
 
-register_command_handler(handler_gettime_xep_disco, COMM_PREFIX+'time', ['muc','info','all','*'], 10, 'Shows time of the indicated nick.', COMM_PREFIX+'time <nick>', [COMM_PREFIX+'time',COMM_PREFIX+'time guy'])
+register_command_handler(handler_gettime_xep_disco, 'time', ['muc','info','all','*'], 10, 'Shows time of the indicated nick.', 'time <nick>', ['time','time guy'])

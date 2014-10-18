@@ -87,7 +87,7 @@ def handler_load_plugin(type, source, body):
 		repl = u'If you doubt - View the list (Command: pluglist)'
 	reply(type, source, repl)
 
-register_command_handler(handler_from_out_com, COMM_PREFIX+'commadd', ['plugin','en','all'], 100,'Enable a command, that previously disabled.\nIf no parameters the bot will list disabled commands.', 'commadd [command]', ['commadd ping','commadd'])
-register_command_handler(handler_command_out, COMM_PREFIX+'commout', ['plugin','en','all'], 100,'Completely disable a command globally (can be enable by command loadpl or bot restart, or by comadd).\nNo parameters will show disabled commands.', 'commout [command]', ['comout ping','commout'])
-register_command_handler(handler_plug_list, COMM_PREFIX+'pluglist', ['plugin','en','all'], 40,'Shows a list of available plugins', 'pluglist', ['pluglist'])
-register_command_handler(handler_load_plugin, COMM_PREFIX+'loadpl', ['plugin','en','all'], 100,'Load one of the available plugins', 'loadpl [plugin_name]', ['loadpl admin'])
+register_command_handler(handler_from_out_com, 'commadd', ['plugin','en','all'], 100,'Enable a command, that previously disabled.\nIf no parameters the bot will list disabled commands.', 'commadd [command]', ['commadd ping','commadd'])
+register_command_handler(handler_command_out, 'commout', ['plugin','en','all'], 100,'Completely disable a command globally (can be enable by command loadpl or bot restart, or by comadd).\nNo parameters will show disabled commands.', 'commout [command]', ['comout ping','commout'])
+register_command_handler(handler_plug_list, 'pluglist', ['plugin','en','all'], 40,'Shows a list of available plugins', 'pluglist', ['pluglist'])
+register_command_handler(handler_load_plugin, 'loadpl', ['plugin','en','all'], 100,'Load one of the available plugins', 'loadpl [plugin_name]', ['loadpl admin'])

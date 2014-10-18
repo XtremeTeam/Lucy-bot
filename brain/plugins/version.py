@@ -114,4 +114,4 @@ def handler_version_answ(coze, res, type, source):
 		
 	reply(type, source, rep)
 	
-register_command_handler(handler_version, COMM_PREFIX+'version', ['info','muc','all','*'], 0, 'Shows information about a client which utillizes user or server.', COMM_PREFIX+'version [nick\server]', [COMM_PREFIX+'version',COMM_PREFIX+'version nick',COMM_PREFIX+'version jsmart.web.id'])
+register_command_handler(handler_version, 'version', ['info','muc','all','*'], 0, 'Shows information about a client which utillizes user or server.', 'version [nick\server]', ['version','version nick','version jsmart.web.id'])

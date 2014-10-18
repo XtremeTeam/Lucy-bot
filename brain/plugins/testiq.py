@@ -253,7 +253,7 @@ def testiq_set(type, source, parameters):
                         #        reply(type, source, u'What is missing')
                          #       return
                         
-register_command_handler(testiq_set, COMM_PREFIX+'iq.set', ['admin','all'], 100, 'Setup test IQ: edit configuration. Available keys:\nTESTIQBDTEXT - Greeting text\nTESTIQBDTEXTWELCOME - greeting text in the case of a correct answer\nTESTIQBDTEXTNOT - text in the case not the correct answer. May contain "%s" it will be replaced by number of remaining attempts\nTESTIQBDTEXTNOTRESON - text reason of kick\nTESTIQTRIALS - number of attempts to answer', 'iq', ['iq','iq yes'])
-register_command_handler(testiq_check, COMM_PREFIX+'iq', ['admin','all'], 100, 'Setup IQ tests for all incoming users.\n * iq - common information\n * iq on/off -  on / off the system\n * iq info - about the system', COMM_PREFIX+'iq', ['iq','iq yes'])
+register_command_handler(testiq_set, 'iq.set', ['admin','all'], 100, 'Setup test IQ: edit configuration. Available keys:\nTESTIQBDTEXT - Greeting text\nTESTIQBDTEXTWELCOME - greeting text in the case of a correct answer\nTESTIQBDTEXTNOT - text in the case not the correct answer. May contain "%s" it will be replaced by number of remaining attempts\nTESTIQBDTEXTNOTRESON - text reason of kick\nTESTIQTRIALS - number of attempts to answer', 'iq', ['iq','iq yes'])
+register_command_handler(testiq_check, 'iq', ['admin','all'], 100, 'Setup IQ tests for all incoming users.\n * iq - common information\n * iq on/off -  on / off the system\n * iq info - about the system', 'iq', ['iq','iq yes'])
 register_message_handler(testiq_message)
 register_join_handler(testiq_join)

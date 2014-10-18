@@ -17,13 +17,13 @@
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 
-handler_pyaiml = COMM_PREFIX+'Aiml'
+handler_pyaiml = 'Aiml'
 
 def handler_commoff(type,source,parameters):
         if not source[1] in GROUPCHATS:
                 reply(type, source, u'this command is available only in the conference')
                 return
-	na=[COMM_PREFIX+'access',COMM_PREFIX+'eval',COMM_PREFIX+'login',COMM_PREFIX+'logout',COMM_PREFIX+'stanza',COMM_PREFIX+'gaccess_set',COMM_PREFIX+'leave',COMM_PREFIX+'restart',COMM_PREFIX+'gaccess_set',COMM_PREFIX+'commands',COMM_PREFIX+'sh',COMM_PREFIX+'exec',COMM_PREFIX+'commoff',COMM_PREFIX+'common',COMM_PREFIX+'Aiml']
+	na=['access','eval','login','logout','stanza','gaccess_set','leave','restart','gaccess_set','commands','sh','exec','commoff','common','Aiml']
 	
 	valcomm,notvalcomm,alrcomm,npcomm,vcnt,ncnt,acnt,nocnt,rep,commoff=u'',u'',u'',u'',0,0,0,0,u'',[]
 	
@@ -78,7 +78,7 @@ def handler_common(type,source,parameters):
 	if not source[1] in GROUPCHATS:
 			reply(type, source, u'this command is available only in the conference')
 			return
-	na=[COMM_PREFIX+'access',COMM_PREFIX+'eval',COMM_PREFIX+'login',COMM_PREFIX+'logout',COMM_PREFIX+'stanza',COMM_PREFIX+'gaccess_set',COMM_PREFIX+'leave',COMM_PREFIX+'restart',COMM_PREFIX+'gaccess_set',COMM_PREFIX+'commands',COMM_PREFIX+'sh',COMM_PREFIX+'exec',COMM_PREFIX+'commoff',COMM_PREFIX+'common',COMM_PREFIX+'Aiml']
+	na=['access','eval','login','logout','stanza','gaccess_set','leave','restart','gaccess_set','commands','sh','exec','commoff','common','Aiml']
 
 	valcomm,notvalcomm,alrcomm,npcomm,vcnt,ncnt,acnt,nocnt,rep,commoff=u'',u'',u'',u'',0,0,0,0,u'',[]
 	if not source[1] in COMMOFF:
@@ -133,7 +133,7 @@ def get_commoff(gch):
 	except:
 		pass
 	
-register_command_handler(handler_commoff, COMM_PREFIX+'commoff', ['admin','muc','all','*'], 20, 'Disable certain commands for the current conf, without parameters shows a list of commands that already disabled.', COMM_PREFIX+'commoff [commands]', [COMM_PREFIX+'commoff',COMM_PREFIX+'commoff %spoke %sdisco %sversion' % (COMM_PREFIX,COMM_PREFIX,COMM_PREFIX)])
-register_command_handler(handler_common, COMM_PREFIX+'common', ['admin','muc','all','*'], 20, 'Enable certain commands for current conf.', COMM_PREFIX+'common [commands]', [COMM_PREFIX+'common %spoke %sdisco %sversion' % (COMM_PREFIX,COMM_PREFIX,COMM_PREFIX)])
+register_command_handler(handler_commoff, 'commoff', ['admin','muc','all','*'], 20, 'Disable certain commands for the current conf, without parameters shows a list of commands that already disabled.', 'commoff [commands]', ['commoff','commoff %spoke %sdisco %sversion'])
+register_command_handler(handler_common, 'common', ['admin','muc','all','*'], 20, 'Enable certain commands for current conf.', 'common [commands]', ['common %spoke %sdisco %sversion'])
 
 register_stage1_init(get_commoff)

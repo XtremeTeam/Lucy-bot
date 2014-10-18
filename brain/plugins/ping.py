@@ -69,4 +69,4 @@ def handler_ping_answ(coze, res, t0, mtype, source, param):
 			rep = u'failed!'
 	reply(mtype, source, rep)
 	
-register_command_handler(handler_ping, COMM_PREFIX+'ping', ['info','muc','all', '*'], 0, 'Pings you, or some nickname or a server.', COMM_PREFIX+'ping [nick]', [COMM_PREFIX+'ping guy',COMM_PREFIX+'ping jsmart.web.id'])
+register_command_handler(handler_ping, 'ping', ['info','muc','all', '*'], 0, 'Pings you, or some nickname or a server.', 'ping [nick]', ['ping guy','ping jsmart.web.id'])

@@ -75,5 +75,5 @@ def handler_userinfo_idle(type, source, parameters):
 		else:
 			reply(type,source,u'Are you sure that user is here? :-O')
 			
-register_command_handler(handler_idle, COMM_PREFIX+'uptime', ['info','muc','all','*'], 10, 'Show uptime of certain server.', COMM_PREFIX+'uptime <server>', [COMM_PREFIX+'uptime jsmart.web.id'])
-register_command_handler(handler_userinfo_idle, COMM_PREFIX+'idle', ['info','muc','all','*'], 10, 'Shows how long a user is nonactive.', COMM_PREFIX+'idle <nick>', [COMM_PREFIX+'idle guy'])
+register_command_handler(handler_idle, 'uptime', ['info','muc','all','*'], 10, 'Show uptime of certain server.', 'uptime <server>', ['uptime jsmart.web.id'])
+register_command_handler(handler_userinfo_idle, 'idle', ['info','muc','all','*'], 10, 'Shows how long a user is nonactive.', 'idle <nick>', ['idle guy'])

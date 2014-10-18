@@ -52,6 +52,6 @@ def handler_changestatus(type, source, parameters):
    else:
      print 'Error: unable to create chatrooms list file!'
 
-register_command_handler(handler_rejoinall, COMM_PREFIX+'rejoinall', ['admin','muc','all'], 100, 'Rejoin bot to conferences according to database.', COMM_PREFIX+'rejoinall', [COMM_PREFIX+'rejoinall'])
+register_command_handler(handler_rejoinall, 'rejoinall', ['admin','muc','all'], 100, 'Rejoin bot to conferences according to database.', 'rejoinall', ['rejoinall'])
 
-register_command_handler(handler_changestatus, COMM_PREFIX+'setstatus', ['muc','admin','all'],100, 'Change bot status in the current conference, if two parameters are not mentioned, bots will use the default status.', COMM_PREFIX+'setstatus[online|chat|away|xa|dnd] [message]', [COMM_PREFIX+'setstatus chat','setstatus dnd', COMM_PREFIX+'setstatus away meeting!!', COMM_PREFIX+'setstatus'])
+register_command_handler(handler_changestatus, 'setstatus', ['muc','admin','all'],100, 'Change bot status in the current conference, if two parameters are not mentioned, bots will use the default status.', 'setstatus[online|chat|away|xa|dnd] [message]', ['setstatus chat','setstatus dnd', 'setstatus away meeting!!', 'setstatus'])

@@ -46,4 +46,4 @@ def handler_upside_join(groupchat, nick, aff, role):
 
 register_message_handler(handler_upside_save_msg)
 register_join_handler(handler_upside_join)
-register_command_handler(handler_upside_last, COMM_PREFIX+ 'upside', ['all'], 10, 'replace english letters with upside down.', COMM_PREFIX+'upside', ['upside'])
+register_command_handler(handler_upside_last,  'upside', ['all'], 10, 'replace english letters with upside down.', 'upside', ['upside'])

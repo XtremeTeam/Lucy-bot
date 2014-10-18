@@ -52,4 +52,4 @@ def youtube(type, source, text):
 
 
 	
-register_command_handler (youtube, COMM_PREFIX+'youtube', ['all', 'all', 'info'], 10, 'Search for YouTube', 'YouTube <word>', ['YouTube anime'])
+register_command_handler (youtube, 'youtube', ['all', 'all', 'info'], 10, 'Search for YouTube', 'YouTube <word>', ['YouTube anime'])

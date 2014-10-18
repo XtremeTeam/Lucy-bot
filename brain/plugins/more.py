@@ -37,7 +37,7 @@ def init_more(gch):
 	if GCHCFGS[gch]['more']:
 		LAST['gch'][gch]['msg']=''
 			
-register_command_handler(handler_more, COMM_PREFIX+'more', ['muc','all','*'], 0, 'Displays the rest of the messages that exceeded the limit of %d characters.' % (MSG_CHATROOM_LIMIT), COMM_PREFIX+'more', [COMM_PREFIX+'more'])
+register_command_handler(handler_more, 'more', ['muc','all','*'], 0, 'Displays the rest of the messages that exceeded the limit of %d characters.' % (MSG_CHATROOM_LIMIT), 'more', ['more'])
 
 register_outgoing_message_handler(handler_more_outmsg)
 register_stage1_init(init_more)

@@ -137,12 +137,12 @@ def handler_acmd_call(type, source, parameters):
 		return
 		
 
-register_command_handler(handler_acmd_call, COMM_PREFIX+'alias_help', ['muc','all'], 20, 'help on adding a command. options:\n help, add, cases, sheets. \nFrom Mr.King', 'setting alias_add <word>=<command>', ['alias_help assistance','alias_help add word=command /me smacs %NICK% haaaa!'])
+register_command_handler(handler_acmd_call, 'alias_help', ['muc','all'], 20, 'help on adding a command. options:\n help, add, cases, sheets. \nFrom Mr.King', 'setting alias_add <word>=<command>', ['alias_help assistance','alias_help add word=command /me smacs %NICK% haaaa!'])
 						
 register_message_handler(handler_test2)
 
-register_command_handler(handler_query_set43, COMM_PREFIX+'alias_add', ['muc','all'], 20, 'to add an alias to the database! \nFrom Mr.King', 'alias_add <word>=<value>', ['alias_add hi=say hello!'])
-register_command_handler(handler_query_all43, COMM_PREFIX+'alias_show', ['muc','all'], 10, 'shows saved aliases!\nFrom Mr.King', 'alias_show', ['alias_show'])
-register_command_handler(handler_query_del43, COMM_PREFIX+'alias_del', ['muc','all'], 20, 'to delete an alias from the database\nFrom Mr.King', 'alias_del <word>', ['alias_del hi'])
+register_command_handler(handler_query_set43, 'alias_add', ['muc','all'], 20, 'to add an alias to the database! \nFrom Mr.King', 'alias_add <word>=<value>', ['alias_add hi=say hello!'])
+register_command_handler(handler_query_all43, 'alias_show', ['muc','all'], 10, 'shows saved aliases!\nFrom Mr.King', 'alias_show', ['alias_show'])
+register_command_handler(handler_query_del43, 'alias_del', ['muc','all'], 20, 'to delete an alias from the database\nFrom Mr.King', 'alias_del <word>', ['alias_del hi'])
 
 

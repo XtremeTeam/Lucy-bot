@@ -43,4 +43,4 @@ def handler_dns_dns(type, source, parameters):
 	else:
 		reply(type, source, u'What was it?')
 
-register_command_handler(handler_dns_dns, COMM_PREFIX+'dns', ['info','all','*'], 10, 'Displays the response from the DNS for a particular host or IP address.', COMM_PREFIX+'dns <host/IP>', [COMM_PREFIX+'dns jsmart.web.id', COMM_PREFIX+'dns 173.212.227.170'])
+register_command_handler(handler_dns_dns, 'dns', ['info','all','*'], 10, 'Displays the response from the DNS for a particular host or IP address.', 'dns <host/IP>', ['dns jsmart.web.id', 'dns 173.212.227.170'])

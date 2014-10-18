@@ -371,14 +371,14 @@ def vote_results(gch):
 	poll_text += u'Total '+str(allv)+u' votes'
 	return poll_text
 
-register_command_handler(handler_vote_polloptions, COMM_PREFIX+'vote*', ['vote','muc','all'], 10, 'Manages options vote. All 4 options:\n1) closed - defines, whether the vote will be open (only in a general chat) or closed (only private)\n2) nicks - defines, wheter the bot record voting, for subsequent issuance, together with the results of the voting\n3) admedit -defines, whether the administration of the conference have the opportunity to edit the vote\n4) time - to determine the time (in seconds) the vote will take. 0 - manual stop', COMM_PREFIX+'vote* <option> <state>', [COMM_PREFIX+'vote* nicks 1',COMM_PREFIX+'vote* time 600'])
-register_command_handler(handler_vote_stoppoll, COMM_PREFIX+'vote-', ['vote','muc','all'], 11, 'Stop the vote, all data is saved to continue voting.', COMM_PREFIX+'vote- <option> <state>', [COMM_PREFIX+'vote- nicks 1',COMM_PREFIX+'vote- time 600'])
-register_command_handler(handler_vote_pollstart, COMM_PREFIX+'vote+', ['vote','muc','all'], 11, ' To submit your views on the current voting.', COMM_PREFIX+'vote+ <view>', [COMM_PREFIX+'vote+ yes'])
-register_command_handler(handler_vote_vote, COMM_PREFIX+'opinion', ['vote','muc','all'], 10, ' To submit your views on the current voting.', COMM_PREFIX+'opinion <view>', [COMM_PREFIX+'opinion yes'])
-register_command_handler(handler_vote_pollopinions, COMM_PREFIX+'opinions', ['vote','muc','all'], 11, 'Commended the ongoing results of the vote in private, do not wish to vote at this.', COMM_PREFIX+'opinions', [COMM_PREFIX+'opinions'])
-register_command_handler(handler_vote_newpoll, COMM_PREFIX+'vote', ['vote','muc','all'], 11, 'Creates a new vote, or sent to a vote in the current chat, if given the views.', COMM_PREFIX+'vote [question]', [COMM_PREFIX+'vote винды - сакс!', COMM_PREFIX+'vote'])
-register_command_handler(handler_vote_pollopinion_add, COMM_PREFIX+'item+', ['vote','muc','all'], 11, 'Add an item (1!) to the current vote.', COMM_PREFIX+'item+ <your_item>', [COMM_PREFIX+'item+ yes'])
-register_command_handler(handler_vote_pollopinion_del, COMM_PREFIX+'item-', ['vote','muc','all'], 11, 'Removes the item from the list. Item number needed.', COMM_PREFIX+'item- <item_number>', [COMM_PREFIX+'item- 5'])
-register_command_handler(handler_vote_endpoll, COMM_PREFIX+'result', ['vote','muc','all'], 11, 'Voting is completed and shows the results.', COMM_PREFIX+'result', [COMM_PREFIX+'result'])
+register_command_handler(handler_vote_polloptions, 'vote*', ['vote','muc','all'], 10, 'Manages options vote. All 4 options:\n1) closed - defines, whether the vote will be open (only in a general chat) or closed (only private)\n2) nicks - defines, wheter the bot record voting, for subsequent issuance, together with the results of the voting\n3) admedit -defines, whether the administration of the conference have the opportunity to edit the vote\n4) time - to determine the time (in seconds) the vote will take. 0 - manual stop', 'vote* <option> <state>', ['vote* nicks 1','vote* time 600'])
+register_command_handler(handler_vote_stoppoll, 'vote-', ['vote','muc','all'], 11, 'Stop the vote, all data is saved to continue voting.', 'vote- <option> <state>', ['vote- nicks 1','vote- time 600'])
+register_command_handler(handler_vote_pollstart, 'vote+', ['vote','muc','all'], 11, ' To submit your views on the current voting.', 'vote+ <view>', ['vote+ yes'])
+register_command_handler(handler_vote_vote, 'opinion', ['vote','muc','all'], 10, ' To submit your views on the current voting.', 'opinion <view>', ['opinion yes'])
+register_command_handler(handler_vote_pollopinions, 'opinions', ['vote','muc','all'], 11, 'Commended the ongoing results of the vote in private, do not wish to vote at this.', 'opinions', ['opinions'])
+register_command_handler(handler_vote_newpoll, 'vote', ['vote','muc','all'], 11, 'Creates a new vote, or sent to a vote in the current chat, if given the views.', 'vote [question]', ['vote винды - сакс!', 'vote'])
+register_command_handler(handler_vote_pollopinion_add, 'item+', ['vote','muc','all'], 11, 'Add an item (1!) to the current vote.', 'item+ <your_item>', ['item+ yes'])
+register_command_handler(handler_vote_pollopinion_del, 'item-', ['vote','muc','all'], 11, 'Removes the item from the list. Item number needed.', 'item- <item_number>', ['item- 5'])
+register_command_handler(handler_vote_endpoll, 'result', ['vote','muc','all'], 11, 'Voting is completed and shows the results.', 'result', ['result'])
 
 register_join_handler(handler_vote_join)

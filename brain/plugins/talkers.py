@@ -271,5 +271,5 @@ if TALKERS_PASSIVE_TIMER:
         print 'This mode os not supported'
 else:
         register_stage2_init(talkers_load)
-register_command_handler(talkers_get, COMM_PREFIX+'talkers', ['muc','all','new'], 0, 'Shows your statistics in this room.\ninfo - information about the plugin and config.\ntop - TOP10 chaters.\nclear - to clear database.', COMM_PREFIX+'talkers [key/JID/nick]', [COMM_PREFIX+'talkers info', COMM_PREFIX+'talkers Guy', COMM_PREFIX+'talkers guy@jsmart.web.id'])
+register_command_handler(talkers_get, 'talkers', ['muc','all','new'], 0, 'Shows your statistics in this room.\ninfo - information about the plugin and config.\ntop - TOP10 chaters.\nclear - to clear database.', 'talkers [key/JID/nick]', ['talkers info', 'talkers Guy', 'talkers guy@jsmart.web.id'])
 

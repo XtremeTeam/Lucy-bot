@@ -15,6 +15,77 @@
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 
+
+def handler_help_help(type, source, parameters):
+	groupchat = source[1]
+	
+	ctglist = []
+	if parameters and COMMANDS.has_key(parameters.strip()):
+		rep = COMMANDS[parameters.strip()]['desc'].decode("utf-8") + u'\nCategories: '
+		for cat in COMMANDS[parameters.strip()]['category']:
+			ctglist.append(cat)
+		rep += ', '.join(ctglist).decode('utf-8')+u'\nUse: ' + COMMANDS[parameters.strip()]['syntax'].decode("utf-8") + u'\nExample:'
+		for example in COMMANDS[parameters]['examples']:
+			rep += u'\n  >  ' + example.decode("utf-8")
+		rep += u'\nNecessary level of access: ' + str(COMMANDS[parameters.strip()]['access'])
+		
+		if GROUPCHATS.has_key(groupchat):
+			if parameters.strip() in COMMOFF[groupchat]:
+				rep += u'\nThis command has been turned off in this conference!'
+			else:
+				pass
+	else:
+		rep = u'Write a word "%scommands" (without quotation marks), to get the list of commands, "%shelp <commands without "%s">" for the receipt of help on a command, %salias_list for a list of aliases, and %salias_acc <alias> to obtain the level of access to certain local aliases and %sgalias_acc <alias> to obtain the level of access to a specific global alias.'
+				
+	reply(type, source, rep)
+
+def handler_help_commands(type, source, parameters):
+	date=time.strftime('%d %b %Y (%a)', time.gmtime()).decode('utf-8')
+	groupchat=source[1]
+	if parameters:
+		rep,dsbl = [],[]
+		total = 0
+		param=parameters.encode("utf-8")
+		catcom=set([((param in COMMANDS[x]['category']) and x) or None for x in COMMANDS]) - set([None])
+		if not catcom:
+			reply(type,source,u'Please write the command again')
+			return
+		for cat in catcom:
+			if has_access(source, COMMANDS[cat]['access'],groupchat):
+				if groupchat in COMMOFF:
+					if cat in COMMOFF[groupchat]:
+						dsbl.append(cat)
+					else:
+						rep.append(cat)
+						total += 1
+				else:
+					rep.append(cat)
+					total += 1					
+		if rep:
+			if type == 'public':
+				reply(type,source,u'Messeged you in private')
+			rep.sort()
+			answ=u'List of commands is in a category "%s" on %s (total: %s):\n\n%s.' %(parameters,date,total,', '.join(rep))
+			if dsbl:
+				dsbl.sort()
+				answ+=u'\n\nThe followings commands has been turned off in this conference (total: %s):\n\n%s.' %(len(dsbl),', '.join(dsbl))
+			reply('private', source,answ)
+		else:
+			reply(type,source,u'You do not have the right permissions')
+	else:
+		cats = set()
+		
+		for x in [COMMANDS[x]['category'] for x in COMMANDS]:
+			cats = cats | set(x)
+			
+		qcats = len(cats)
+		cats = ', '.join(cats).decode('utf-8')
+		
+		if type == 'public':
+			reply(type,source,u'Look in your private!')
+
+		reply('private', source, u'List of categories on %s (total: %s):\n\n%s.\n\no view a list of commands contained in the category, type "%scommands <category>" without the quotation marks, example "%scommands *"' % (date,qcats,cats))
+
 def popups_check(gch):
 	DBPATH='settings/'+gch+'/config.cfg'
 	if GCHCFGS[gch].has_key('popups'):
@@ -50,11 +121,11 @@ def remote(type, source, parameters):
 			if int(dest_gch) <= len(groupchats) and int(dest_gch) != 0:
 				dest_gch = groupchats[int(dest_gch)-1]
 			else:
-				reply(type, source, u'The Conference does not exist!')
+				reply(type, source, u'That chatroom does not exist!')
 				return
 		else:
 			if not dest_gch in groupchats:
-				reply(type, source, u'The Conference does not exist!')
+				reply(type, source, u'That Chatroom does not exist!')
 				return
 				
 		if len(spltdp) >= 3:
@@ -195,7 +266,7 @@ def set_nick(type, source, parameters):
 		groupchat=source[1]
 		nick=parameters
 		join_groupchat(groupchat,nick)
-		reply(type, source, u'Memorized!')
+		reply(type, source, u'Nickname changed')
 	else:
 		reply(type, source, u'Read help on command!')
 					
@@ -240,11 +311,11 @@ def lucy_join(type, source, parameters):
 				join_groupchat(groupchat, bot_nick, passw)
 		MACROS.load(groupchat)
 		if bot_nick:
-			reply(type, source, u'I have joined' + groupchat+u' with the nickname '+bot_nick+'.')
+			reply(type, source, u'I\'m joining ' + groupchat+u' with the nickname '+bot_nick+'.')
 		else:
-			reply(type, source, u'I have joined' + groupchat+u' with the nickname '+DEFAULT_NICK+'.')
+			reply(type, source, u'I\'m joining ' + groupchat+u' with the nickname '+DEFAULT_NICK+'.')
 		if popups_check(groupchat):
-			msg(groupchat, u'joined by '+source[2]+'.')
+			msg(groupchat, u'Sent by Bot Admin '+source[2]+'.')
 	else:
 		reply(type, source, u'Read help!')
 
@@ -280,14 +351,14 @@ def lucy_leave(type, source, parameters):
 		reason = ''
 	if popups_check(groupchat):
 		if reason:
-			msg(groupchat, u'I have left that conference. By '+source[2]+u' with reason:\n'+reason)
+			msg(groupchat, u'I\'m leaving, '+source[2]+u' Because reason:\n'+reason)
 		else:
-			msg(groupchat, u'I have left that conference. By '+source[2]+'.')
+			msg(groupchat, u'I\'m leaving, Goodbye. '+ groupchat+'.')
 	if reason:
 		leave_groupchat(groupchat, u'I have left that conference. By '+source[2]+u' with reason:\n'+reason)
 	else:
 		leave_groupchat(groupchat,u'I have left that conference. By '+source[2]+'.')
-	reply(type, source, u'leaved ' + groupchat+'.')
+	reply(type, source, u'leaving ' + groupchat+'.')
 
 
 def admin_msg(type, source, parameters):
@@ -348,16 +419,16 @@ def lucy_reload(type, source, parameters):
 	if reason:
 		for x in gch:
 			if popups_check(x):
-				msg(x, u'restarted by '+source[2]+u' with reason:\n'+reason)
+				msg(x, u'rebooting because '+source[2]+u' wanted me to for reason:\n'+reason)
 	else:
 		for x in gch:
 			if popups_check(x):
-				msg(x, u'restarted by '+source[2]+'.')
+				msg(x, u'reboot command called by '+source[2]+'.')
 	prs=xmpp.Presence(typ='unavailable')
 	if reason:
-		prs.setStatus(source[2]+u': restarted me --> '+reason)
+		prs.setStatus(source[2]+u': rebooting because - '+reason)
 	else:
-		prs.setStatus(source[2]+u': restarted.')
+		prs.setStatus(source[2]+u': Rebooting.')
 	JCON.send(prs)
 	time.sleep(1)
 	JCON.disconnect()
@@ -375,23 +446,23 @@ def lucy_shdwn(type, source, parameters):
 	if reason:
 		for x in gch:
 			if popups_check(x):
-				msg(x, u'shut down by '+source[2]+u' with reason:\n'+reason)
+				msg(x, u'Shut down because Bot Admin '+source[2]+u' For reason:\n'+reason)
 	else:
 		for x in gch:
 			if popups_check(x):
 				msg(x, u'shut down by '+source[2]+'.')
 	prs=xmpp.Presence(typ='unavailable')
 	if reason:
-		prs.setStatus(source[2]+u': shut me down --> '+reason)
+		prs.setStatus(source[2]+u': shut me down  because - '+reason)
 	else:
-		prs.setStatus(source[2]+u': shut me down.')
+		prs.setStatus(source[2]+u': shutting down. Goodbye')
 	JCON.send(prs)
 	time.sleep(2)
 	os.abort()
 	
 def popups_onoff(type, source, parameters):
 	if not source[1] in GROUPCHATS:
-		reply(type, source, u'This command only possible in the conference!')
+		reply(type, source, u'Type this in the chatroom only')
 		return
 	if parameters:
 		try:
@@ -544,12 +615,12 @@ def delivery(type,source,body):
 					msg(adli,rep)
 
 				
-register_command_handler(lucy_join, 'join', ['superadmin','muc','all','*'], 0, 'Join to a conference, if there is a password write that password right after the name of conference.', 'join <conference> [pass=1234] [botnick]', ['join botzone@conference.jabberuk.dyndns.org', 'join join botzone@conference.jsmart.web.id somebot', 'join join botzone@conference.jsmart.web.id pass=1234 somebot'])
-register_command_handler(lucy_leave, 'leave', ['admin','muc','all','*'], 40, 'Leave bot from the current or a specific conference.', 'leave <conference> [reason]', ['leave botzone@conference.jabberuk.dyndns.org (reason = sleep', 'leave sleep','leave'])
+register_command_handler(lucy_join, 'join', ['superadmin','muc','all','*'], 100, 'Join to a conference, if there is a password write that password right after the name of conference.', 'join <conference> [pass=1234] [botnick]', ['join botzone@conference.jabberuk.dyndns.org', 'join join botzone@conference.jsmart.web.id somebot', 'join join botzone@conference.jsmart.web.id pass=1234 somebot'])
+register_command_handler(lucy_leave, 'leave', ['admin','muc','all','*'], 30, 'Leave bot from the current or a specific conference.', 'leave <conference> [reason]', ['leave botzone@conference.jabberuk.dyndns.org (reason = sleep', 'leave sleep','leave'])
 register_command_handler(admin_msg, 'amsg', ['admin','muc','all','*'], 40, 'Send message on behalf of bot to a certain JID.', 'message <jid> <message>', ['message guy@jsmart.web.id how are you?'])
 #register_command_handler(admin_say, 'say', ['admin','muc','all','*'], 20, 'Talk through bot.', 'say <message>', ['say *HI* peoples'])
 register_command_handler(lucy_reload , 'reboot', ['superadmin','all','*'], 100, 'Restart bot.', 'restart [reason]', ['restart','restart refreshing!'])
-register_command_handler(lucy_shdwn, 'shutd', ['superadmin','all','*'], 100, 'Shuts the bot down.', 'halt [reason]', ['halt','halt fixing bug!'])
+register_command_handler(lucy_shdwn, 'shutd', ['superadmin','all','*'], 100, 'Shuts the bot down.', 'halt [reason]', ['shutd','shutd fixing bug!'])
 register_command_handler(glob_msg, 'globmsg', ['superadmin','muc','all','*'], 100, 'Send message to all conference, where the bot exist.', 'globmsg [message]', ['globmsg hi all!'])
 register_command_handler(glob_msg_help, 'hglobmsg', ['superadmin','muc','all','*'], 100, 'Send message to all conference, where the bot exist. The message will contain a header with a short pre help.', 'hglobmsg [message]', ['hglobmsg hi all!'])
 register_command_handler(popups_onoff, 'popups', ['admin','muc','all','*'], 30, 'Off (0) and On (1) message about join/leaves, restarts/off, and also global news for certain conf. Without a parameter the bot will based on current state.', 'popups [1|0]', ['popups 1','popups'])
@@ -558,6 +629,8 @@ register_command_handler(change_status, 'set_status', ['admin','muc','all','*'],
 register_command_handler(set_nick, 'rename', ['superadmin','muc','all','*'], 100, 'Changes the bot nickname in the current conference.', 'set_nick <nick>', ['set_nick somebot'])
 register_command_handler(remote, 'remote', ['superadmin','muc','all','*'], 100, 'Allows you to remotely execute commands and aliases in other conferences on behalf of the bot and get the result. Without parameters displays a list of conferences with the numbers, instead of the full name of the conference can use a number from the list.', 'remote <groupchat|number from the list> <comm> <parameters>', ['remote botzone@conference.jsmart.web.id.aq ping guy','remote 2 time guy','remote'])
 register_command_handler(redirect, 'redirect', ['admin','muc','all','*'], 20, 'Redirects the result of a command or an alias to the specified user in private. If the alias or command is not specified and instead the text, or any false, then sends the user a message.', 'redirect <nick>:<command>[<params>]|<mess>', ['redirect guy: ping lady'])
+register_command_handler(handler_help_help, 'help', ['help','info','all','*'], 0, 'Show detail information about a certain command.', 'help [command]', ['help', 'help ping'])
+register_command_handler(handler_help_commands, 'commands', ['help','info','all','*'], 0, 'Shows the list of all of categories of commands. At the query of category shows the list of commands being in it.', 'commands [category]', ['commands','commands *'])
 
 register_stage1_init(autoaway_state)
 #register_stage1_init(set_default_gch_status)

@@ -20,6 +20,40 @@
 poke_nicks={}
 inv_id=[]
 PROTECT_INV=[]
+turn_msgs={}
+global_en2ru_table = dict(zip(u"abcdefghijklmnopqrstuvwxyzɐqɔpǝɟƃɥıɾʞlɯuodbɹsʇnʌʍxʎzABCDEFGHIJKLMNOPQRSTUVWXYZ", u"ɐqɔpǝɟƃɥıɾʞlɯuodbɹsʇnʌʍxʎzabcdefghijklmnopqrstuvwxyzɐqɔpǝɟƃɥıɾʞlɯuodbɹsʇnʌʍxʎzabcdefghijklmnopqrstuvwxyz"))
+
+def handler_upside_last(type, source, parameters):
+	nick=source[2]
+	groupchat=source[1]
+	jid=get_true_jid(groupchat+'/'+nick)	
+	if parameters:
+		reply(type,source,reduce(lambda x,y:global_en2ru_table.get(x,x)+global_en2ru_table.get(y,y),parameters))
+	else:
+		if turn_msgs[groupchat][jid] is None:
+			reply(type,source,u'you nothing write')
+			return
+		if turn_msgs[groupchat][jid] == u'upside':
+			reply(type,source,u'forbidden')
+			return		
+		tmsg=turn_msgs[groupchat][jid]
+		reply(type,source,reduce(lambda x,y:global_en2ru_table.get(x,x)+global_en2ru_table.get(y,y),tmsg))
+
+def handler_upside_save_msg(type, source, body):
+	time.sleep(1)
+	nick=source[2]
+	groupchat=source[1]
+	jid=get_true_jid(groupchat+'/'+nick)
+	if groupchat in turn_msgs.keys():
+		if jid in turn_msgs[groupchat].keys() and jid != groupchat and jid != JID:
+			turn_msgs[groupchat][jid]=body
+	
+def handler_upside_join(groupchat, nick, aff, role):
+	jid=get_true_jid(groupchat+'/'+nick)
+	if not groupchat in turn_msgs.keys():
+		turn_msgs[groupchat] = {}
+	if not jid in turn_msgs[groupchat].keys() and jid != JID:
+		turn_msgs[groupchat][jid]=None
 
 def handler_poke(type, source, parameters):
 	if type=='private':
@@ -309,6 +343,9 @@ def handler_default_bot_nick(type, source, parameters):
         join_groupchat(source[1], DEFAULT_NICK)
         reply(type, source, u'OK, the default nickname has been set.')
 
+register_message_handler(handler_upside_save_msg)
+register_join_handler(handler_upside_join)
+register_command_handler(handler_upside_last,  'upside', ['all'], 10, 'replace english letters with upside down.', 'upside', ['upside'])
 register_command_handler(handler_default_bot_nick, 'sdbn', ['delirium','en','all'], 20, 'Change the nickname of the bot to it\'s default, which is '+DEFAULT_NICK, 'sdbn')
 register_command_handler(handler_poke, 'poke', ['fun','all','*','poke'], 10, 'Poke the user. Forces him to pay attention to you /in chat, специально для слоупоков.\nlast10 instead of a nick show a list of workers who poked latest.', 'poke <nick>|<parameter>', ['poke qwerty','poke + sing %s','poke - 2','poke *'])
 register_command_handler(handler_poke_add, 'poke+', ['fun','all','*','poke'], 20, 'Add a custom phrases. The variable %s in the phrase refers to a place to insert a nickname (mandatory parameter). The phrase should be written by a third person, it will use the following form "/me your phrase". max number of custom phrases is 20 characters.', 'poke+ <phrase>', ['poke+ sing %s'])

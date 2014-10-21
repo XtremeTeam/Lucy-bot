@@ -281,6 +281,7 @@ def lucy_join(type, source, parameters):
 			return
 		if len(args)>1:
 			groupchat = args[0]
+			print 'Joined: '+groupchat+'\n'
 			passw = string.split(args[1], 'pass=', 1)
 			if not passw[0]:
 				bot_nick = ' '.join(args[2:])
@@ -288,6 +289,7 @@ def lucy_join(type, source, parameters):
 				bot_nick = ' '.join(args[1:])
 		else:
 			groupchat = parameters
+			print 'Joined: '+groupchat+'\n'
 			bot_nick = ''
 		get_gch_cfg(groupchat)
 		for process in STAGE1_INIT:
@@ -333,6 +335,7 @@ def lucy_leave(type, source, parameters):
 			reply(type, source, u'I am not there!')
 			return
 		groupchat = args[0]
+		print 'Left: '+groupchat+'\n'
 	elif len(args)==1:
 		level=int(user_level(source[1]+'/'+source[2], source[1]))
 		if level<40 and args[0]!=source[1]:
@@ -343,11 +346,13 @@ def lucy_leave(type, source, parameters):
 			return
 		reason = ''
 		groupchat = args[0]
+		print 'Left: '+groupchat+'\n'
 	else:
 		if not source[1] in GROUPCHATS:
 			reply(type, source, u'This command only possible in the conference!')
 			return
 		groupchat = source[1]
+		print 'Left: '+groupchat+'\n'
 		reason = ''
 	if popups_check(groupchat):
 		if reason:

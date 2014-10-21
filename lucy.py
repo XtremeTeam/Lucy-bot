@@ -762,6 +762,7 @@ def leave_groupchat(groupchat,status=''):
 		if 'thr' in LAST['gch'][groupchat]:
 			if not LAST['gch'][groupchat]['thr'] is None: LAST['gch'][groupchat]['thr'].cancel()
 
+
 def msg(target, body):
 	if not isinstance(body, unicode):
 		body = body.decode('utf8', 'replace')
@@ -1178,7 +1179,8 @@ def start():
 
    if check_file(file='chatrooms.list'):
       groupchats = eval(read_file(GROUPCHAT_CACHE_FILE))
-      print 'Entering %s Rooms' % str(len(groupchats))
+      print 'Entering Rooms', str(len(groupchats))
+      print groupchats.keys()
       for groupchat in groupchats:
          get_gch_cfg(groupchat)
          MACROS.init(groupchat)
@@ -1198,7 +1200,6 @@ def start():
       print 'Error: unable to create chatrooms list file!'
 
 #   load_plugins()
-   
 
    print '\nDone loading!\n'
       

@@ -19,7 +19,7 @@ Installing:
  -  **Windows**: Click the zip folder on the right
  
  - **Linux**: `git clone https://github.com/XtremeTeam/Lucy-bot.git`
- - 
+ -  go to settings re-name config to config.ini.
  
 Thanks goes out to XMPP and python
 ------------

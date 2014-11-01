@@ -996,8 +996,8 @@ def presenceHnd(con, prs):
 
 def iqHnd(con, iq):
 	fromjid = iq.getFrom()
-	if user_level(fromjid,fromjid.getStripped())==-100:
-		return
+	#if user_level(fromjid,fromjid.getStripped())==-100:
+	#	return
 	global JCON, BOT_VER
 	if not iq.getType() == 'error':
 		if iq.getTags('query', {}, xmpp.NS_VERSION):

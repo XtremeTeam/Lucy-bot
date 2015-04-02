@@ -917,28 +917,11 @@ def presenceHnd(con, prs):
 	item = findPresenceItem(prs)
 	INFO['prs'] += 1
 	
-	global MANUAL_SUBSCRIBE
-	global MANUAL_USUBSCRIBE
-	global GTEMP_SUBS_NAME
-	
-	if AUTO_SUBSCRIBE or MANUAL_SUBSCRIBE == 1:
-		if ptype == 'subscribe':
-			ROSTER.Authorize(fromjid)
-			
-			if MANUAL_SUBSCRIBE == 1:
-				if GTEMP_SUBS_NAME:
-					ROSTER.setItem(fromjid,GTEMP_SUBS_NAME,['bot-users'])
-					GTEMP_SUBS_NAME = ''
-					
-				MANUAL_SUBSCRIBE = 0
-			else:
-				ROSTER.setItem(fromjid,None,['bot-users'])
-	else:
-		if ptype == 'subscribe':
-			ROSTER.Unauthorize(fromjid)
-			ROSTER.delItem(fromjid)
-			MANUAL_USUBSCRIBE = 0
-	
+	if ptype == 'subscribe':
+		JCON.send(xmpp.protocol.Presence(to=fromjid, typ='subscribed'))
+	elif ptype == 'unsubscribe':
+		JCON.send(xmpp.protocol.Presence(to=fromjid, typ='unsubscribed'))
+
 	if groupchat in GROUPCHATS:
 		if ptype == 'unavailable':
 			jid = item['jid']
@@ -967,6 +950,14 @@ def presenceHnd(con, prs):
 			jid = item['jid']
 			afl=prs.getAffiliation()
 			role=prs.getRole()
+			if not jid:
+				jid=fromjid
+#				time.sleep(2)
+#				msg(groupchat, u'my functionality to a full degree without rights for administrator is impossible (exit)')
+#				time.sleep(1)
+#				leave_groupchat(groupchat, u'leaving due to lack of role administrator  %)')        
+#				return
+#			else:
 			if nick in GROUPCHATS[groupchat] and GROUPCHATS[groupchat][nick]['jid']==jid and GROUPCHATS[groupchat][nick]['ishere']==1:
 				pass
 			else:
@@ -986,10 +977,7 @@ def presenceHnd(con, prs):
 				elif ecode in ['401','403','405',]:
 					leave_groupchat(groupchat, u'got %s error code' % str(ecode))
 				elif ecode == '503':
-					try:
-						threading.Timer(60, join_groupchat,(groupchat, nick)).start()
-					except RuntimeError:
-						pass
+					threading.Timer(60, join_groupchat,(groupchat, nick)).start()
 		else:
 			pass
 		call_presence_handlers(prs)
